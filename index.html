@@ -1,495 +1,332 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark">
+<html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ПРОВЕРЕННЫЙ ГРУЗ</title>
 <style>
-:root{--bg:#0e1116;--card:#171c24;--text:#e8ecf1;--muted:#8b96a5;--accent:#2ecc71;--accent2:#27ae60;--line:#232a35;--danger:#e74c3c;--warn:#f39c12}
-[data-theme="light"]{--bg:#f4f6f9;--card:#ffffff;--text:#1a1f27;--muted:#697382;--line:#e2e7ee}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,'Segoe UI',Roboto,sans-serif;padding-bottom:70px}
-.screen{padding:14px;max-width:640px;margin:0 auto}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
-h1{font-size:22px;margin-bottom:10px}h2{font-size:18px;margin:14px 0 8px}
-.btn{display:block;width:100%;padding:13px;border:0;border-radius:12px;background:var(--accent);color:#06220f;font-weight:700;font-size:16px;margin:8px 0;cursor:pointer}
-.btn.gray{background:var(--line);color:var(--text)}
-.btn.red{background:var(--danger);color:#fff}
-.btn.small{display:inline-block;width:auto;padding:8px 14px;font-size:14px;border-radius:10px}
-input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:15px;margin:5px 0}
-label{font-size:13px;color:var(--muted);display:block;margin-top:8px}
-.banner{border-radius:14px;overflow:hidden;margin-bottom:12px;min-height:90px;background:linear-gradient(120deg,#27ae60,#145a32);display:flex;align-items:center;padding:16px;color:#fff;font-weight:800;font-size:18px}
-.banner img{width:100%;display:block}
-.logo{height:44px;border-radius:10px}
-.row{display:flex;gap:8px;align-items:center}
-.pill{display:inline-block;padding:4px 10px;border-radius:20px;background:var(--line);color:var(--muted);font-size:12px;margin:2px}
-.pill.ok{background:rgba(46,204,113,.15);color:var(--accent)}
-.pill.warn{background:rgba(243,156,18,.15);color:var(--warn)}
-.pill.red{background:rgba(231,76,60,.15);color:var(--danger)}
-.circles{display:flex;gap:5px}
-.circle{width:16px;height:16px;border-radius:50%;border:2px solid var(--muted)}
-.circle.f1{background:33% var(--accent);background:conic-gradient(var(--accent) 0 33%,transparent 33% 100%);border-color:var(--accent)}
-.circle.f2{background:conic-gradient(var(--accent) 0 66%,transparent 66% 100%);border-color:var(--accent)}
-.circle.f3{background:var(--accent);border-color:var(--accent)}
-.nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex}
-.nav button{flex:1;background:none;border:0;color:var(--muted);padding:10px 2px;font-size:11px;cursor:pointer}
-.nav button.on{color:var(--accent)}
-.nav .ic{font-size:20px;display:block}
-.check{display:var(--accent);color:#06220f;font-weight:900}
-.verified{color:var(--accent);font-weight:700}
-.tabs{display:flex;gap:8px;margin:8px 0;flex-wrap:wrap}
-.tabs button{padding:8px 14px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer}
-.tabs button.on{border-color:var(--accent);color:var(--accent)}
-.small{font-size:12px;color:var(--muted)}
-a{color:var(--accent)}
-table{width:100%;border-collapse:collapse;font-size:13px}
-td,th{padding:6px;border-bottom:1px solid var(--line);text-align:left}
-.toast{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:var(--accent2);color:#fff;padding:10px 18px;border-radius:12px;z-index:99}
-.hidden{display:none}
+:root{--bg1:#0b0f1a;--bg2:#141b2e;--acc:#f5b942;--acc2:#ff8a3c;--tx:#f2f4fa;--mut:#93a0b8;--glass:rgba(255,255,255,.06);--brd:rgba(255,255,255,.14);--ok:#39d98a;--bad:#ff5c6c}
+body.light{--bg1:#eef2f9;--bg2:#dbe4f2;--tx:#182035;--mut:#5b6a85;--glass:rgba(255,255,255,.55);--brd:rgba(20,30,60,.12)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:-apple-system,'SF Pro Display','Segoe UI',Roboto,sans-serif;background:radial-gradient(1200px 700px at 20% -10%,rgba(245,185,66,.14),transparent 60%),radial-gradient(1000px 700px at 90% 110%,rgba(64,120,255,.14),transparent 60%),linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--tx);min-height:100vh;padding-bottom:90px;transition:background .3s}
+.glass{background:var(--glass);border:1px solid var(--brd);border-radius:22px;backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.wrap{max-width:560px;margin:0 auto;padding:16px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;border:none;border-radius:16px;font-size:16px;font-weight:700;cursor:pointer;color:#1b1200;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 10px 26px rgba(245,150,60,.35);transition:transform .12s}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--brd);box-shadow:none}
+.btn.small{width:auto;padding:9px 14px;font-size:14px;border-radius:12px}
+.btn.ok{background:linear-gradient(135deg,#39d98a,#22b573);color:#04140c}
+.btn.bad{background:linear-gradient(135deg,#ff5c6c,#d63a4a);color:#fff}
+input,select,textarea{width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--brd);background:var(--glass);color:var(--tx);font-size:15px;outline:none;backdrop-filter:blur(10px)}
+input:focus,textarea:focus,select:focus{border-color:var(--acc)}
+label{font-size:13px;color:var(--mut);display:block;margin:12px 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:.5px}
+h2{font-size:20px;margin:18px 0 10px}
+h3{font-size:16px}
+.mut{color:var(--mut);font-size:13px}
+.top{display:flex;align-items:center;gap:10px;padding:14px 4px 6px}
+.logo{width:46px;height:46px;border-radius:14px;overflow:hidden;flex-shrink:0;box-shadow:0 6px 18px rgba(245,150,60,.4)}
+.logo img,.logo svg{width:100%;height:100%;object-fit:cover;display:block}
+.spacer{flex:1}
+.iconbtn{width:40px;height:40px;border-radius:12px;border:1px solid var(--brd);background:var(--glass);color:var(--tx);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.banner{height:120px;border-radius:22px;overflow:hidden;margin:14px 0;position:relative}
+.banner img,.banner svg{width:100%;height:100%;object-fit:cover;display:block}
+.banner .tag{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);color:#ffd479;font-size:10px;font-weight:800;padding:4px 9px;border-radius:20px;letter-spacing:.5px}
+.search{display:flex;gap:8px;margin:10px 0}
+.card{padding:14px;margin:12px 0;cursor:pointer}
+.route{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;margin-bottom:4px}
+.dotline{flex:1;border-top:2px dotted var(--mut);opacity:.5}
+.truckph{width:110px;height:74px;flex-shrink:0}
+.cardrow{display:flex;gap:12px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:5px;background:var(--glass);border:1px solid var(--brd);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--mut);margin:3px 4px 0 0}
+.pill.gold{color:#ffd479;border-color:rgba(245,185,66,.5)}
+.price{font-size:20px;font-weight:900;color:#ffd479}
+.acts{display:flex;gap:8px;margin-top:10px}
+.acts .btn{padding:10px;font-size:14px;border-radius:12px}
+.fav{position:absolute;top:10px;right:10px;font-size:22px;background:none;border:none;cursor:pointer;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+.card{position:relative}
+.check{color:var(--ok);font-weight:800}
+.circles{display:flex;gap:6px;margin:6px 0}
+.circ{width:22px;height:22px;border-radius:50%;border:2px solid var(--brd);overflow:hidden;position:relative;background:var(--glass)}
+.circ i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--ok),#7ef0b6)}
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;padding:10px 6px calc(12px + env(safe-area-inset-bottom));background:rgba(15,20,35,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--brd);z-index:50}
+body.light .nav{background:rgba(255,255,255,.7)}
+.nav button{background:none;border:none;color:var(--mut);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;padding:4px 0}
+.nav button.act{color:var(--acc);font-weight:700}
+.nav .ic{font-size:20px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;z-index:100}
+.sheet{width:100%;max-width:560px;max-height:88vh;overflow:auto;padding:20px;border-radius:26px 26px 0 0}
+.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,rgba(20,26,45,.95),rgba(35,45,75,.95));color:#fff;padding:12px 20px;border-radius:16px;border:1px solid var(--brd);z-index:200;font-size:14px;box-shadow:0 12px 30px rgba(0,0,0,.4);animation:tin .3s}
+@keyframes tin{from{opacity:0;transform:translate(-50%,-12px)}}
+.row{display:flex;align-items:center;gap:10px}
+.list{margin:8px 0}
+.item{padding:12px;border-radius:16px;border:1px solid var(--brd);background:var(--glass);margin:8px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.news{padding:0;overflow:hidden}
+.news img,.news svg{width:100%;height:150px;object-fit:cover;display:block}
+.news .nb{padding:12px}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;color:#ffd479}
+.badge{display:inline-block;padding:3px 10px;border-radius:14px;font-size:11px;font-weight:800}
+.b-ok{background:rgba(57,217,138,.15);color:var(--ok)}
+.b-warn{background:rgba(255,180,60,.15);color:#ffb43c}
+.b-bad{background:rgba(255,92,108,.15);color:var(--bad)}
+.checkrow{display:flex;gap:10px;align-items:flex-start;padding:14px;border-radius:16px;border:1px solid var(--brd);background:var(--glass);margin:10px 0}
+.checkrow input{width:22px;height:22px;flex-shrink:0;margin-top:2px;accent-color:var(--acc)}
+.avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#1b1200;flex-shrink:0}
+hr{border:none;border-top:1px solid var(--brd);margin:14px 0}
+.cent{text-align:center}
 </style>
 </head>
 <body>
-<div id="app"></div>
-<div id="toast"></div>
+<div id="app" class="wrap"></div>
+<div class="nav" id="nav" style="display:none"></div>
 <script>
-/* ============ ХРАНИЛИЩЕ ============ */
-const KEY='pg_db_v1';
-let db=JSON.parse(localStorage.getItem(KEY)||'null')||{
- users:[],loads:[],claims:[],reviews:[],blacklist:[],viol:[],news:[],ads:[],
- notifs:[],appReviews:[],searches:[],settings:{banner:'',logo:'',tg:'https://t.me/proverennyi_gruz'},
- session:null,trialStart:null
-};
-function save(){localStorage.setItem(KEY,JSON.stringify(db));}
-function toast(t){const el=document.getElementById('toast');el.textContent=t;el.className='toast';setTimeout(()=>el.className='toast hidden',2200);}
-function esc(s){return (s||'').toString().replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));}
-function uid(){return Date.now()+''+Math.floor(Math.random()*999);}
-function phoneNorm(p){return (p||'').replace(/\D/g,'').slice(-10);}
-function djb2(s){let h=5381;for(let i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))>>>0;}return 'h'+h;}
-const ADMIN_HASH=djb2('ПГРТ-2026');
-function me(){return db.users.find(u=>u.id===db.session);}
-
-/* ============ ГОРОДА (~100, Татарстан + Россия) ============ */
-const CITIES=["Казань","Набережные Челны","Нижнекамск","Альметьевск","Зеленодольск","Елабуга","Бугульма","Чистополь","Лениногорск","Заинск","Нурлат","Мензелинск","Бавлы","Агрыз","Арск","Кукмор","Мамадыш","Тетюши","Буинск","Азнакаево","Лаишево","Рыбная Слобода","Пестрецы","Аксубаево","Алексеевское","Апастово","Балтаси","Верхний Услон","Высокая Гора","Дрожжаное","Камское Устье","Куйбышевский Затон","Сарманово","Спасск","Тюлячи","Черемшан","Ютазы","Актаныш","Муслюмово","Новошешминск","Атня","Кайбицы","Пестречинка",
-"Москва","Санкт-Петербург","Самара","Уфа","Пермь","Екатеринбург","Челябинск","Тюмень","Ижевск","Киров","Чебоксары","Йошкар-Ола","Ульяновск","Саратов","Пенза","Оренбург","Нижний Новгород","Владимир","Иваново","Кострома","Ярославль","Вологда","Рязань","Тула","Калуга","Брянск","Смоленск","Тверь","Псков","Великий Новгород","Курск","Орёл","Липецк","Воронеж","Тамбов","Белгород","Ростов-на-Дону","Таганрог","Краснодар","Ставрополь","Астрахань","Волгоград","Сочи","Симферополь","Севастополь","Керчь","Сургут","Нижневартовск","Новый Уренгой","Ноябрьск","Ханты-Мансийск","Архангельск","Северодвинск","Мурманск","Калининград","Ухта","Воркута","Сыктывкар","Новосибирск","Красноярск","Омск","Томск","Кемерово","Новокузнецк","Барнаул","Иркутск","Улан-Удэ","Чита","Якутск","Хабаровск","Владивосток","Уссурийск","Благовещенск","Южно-Сахалинск","Абакан","Кызыл","Горно-Алтайск","Майкоп","Нальчик","Владикавказ","Грозный","Магас","Черкесск","Элиста","Махачкала","Каспийск","Дербент","Салават","Стерлитамак","Орск","Балаково","Дзержинск","Тольятти","Сызрань","Миасс","Магнитогорск","Копейск","Первоуральск","Серов"];
-const BODY_TYPES=["Тент","Рефрижератор","Борт","Зерновоз","Бункеровоз","Контейнеровоз","Изотерм","Самосвал","Муковоз","Цистерна","Битумовоз","Автовоз","Скотовоз","Панелевоз","Металловоз","Трал","Низкорамник","Манипулятор","Хлебовоз","Реф с мясным режимом","Тент 100 м³","Штора"];
-const SPEC22=["Экскаватор","Погрузчик","Бульдозер","Кран","Автовышка","Манипулятор","Самосвал","Грейдер","Каток","Асфальтоукладчик","Бетоносмеситель","Автобетононасос","Ямобур","Сваебой","Кран-манипулятор","Снегопогрузчик","Трактор МТЗ","Трактор К-700","Комбайн","Культиватор","Сеялка","Опрыскиватель"];
-const PAY=["Наличные","Безналичные с НДС","Безналичные без НДС"];
-const BAD=["дурак","идиот","спам","казино","наркотик"];
-const TATAR="https://t.me/proverennyi_gruz";
-
-/* ============ НАВИГАЦИЯ ============ */
-let nav={screen:'welcome',tab:'feed',admin:false,loadFilter:{from:'',to:''},editUserId:null};
-function go(o){Object.assign(nav,o);render();}
-
-function route(){
- if(!db.session){return nav.screen==='auth'?'auth':(db.trialStart&&Date.now()-db.trialStart>86400000?'blocked':'welcome');}
- const u=me();
- if(!u){return 'auth';}
- if(u.deletedAt){return Date.now()>u.restoreUntil?'welcome':'restore';}
- if(nav.screen==='admin')return 'admin';
- return nav.screen;
+const A_HASH="be9fa070";
+const CITIES=["Казань", "Набережные Челны", "Нижнекамск", "Альметьевск", "Зеленодольск", "Бугульма", "Елабуга", "Лениногорск", "Чистополь", "Нурлат", "Нижняя Мактама", "Агрыз", "Арск", "Буинск", "Азнакаево", "Менделеевск", "Мензелинск", "Мамадыш", "Кукмор", "Лаишево", "Пестрецы", "Тетюши", "Заинск", "Бавлы", "Актаныш", "Алексеевское", "Апастово", "Балтаси", "Верхний Услон", "Высокая Гора", "Дрожжаное", "Кайбицы", "Камское Устье", "Муслюмово", "Новошешминск", "Рыбная Слобода", "Саба", "Сарманово", "Спасск", "Тюлячи", "Черемшан", "Шемордан", "Иннополис", "Болгар", "Свияжск", "Москва", "Санкт-Петербург", "Уфа", "Самара", "Тольятти", "Сызрань", "Чебоксары", "Йошкар-Ола", "Ижевск", "Саранск", "Пермь", "Киров", "Нижний Новгород", "Дзержинск", "Ульяновск", "Димитровград", "Пенза", "Кузнецк", "Саратов", "Энгельс", "Балаково", "Волгоград", "Волжский", "Ростов-на-Дону", "Таганрог", "Краснодар", "Новороссийск", "Сочи", "Ставрополь", "Пятигорск", "Минеральные Воды", "Грозный", "Махачкала", "Дербент", "Астрахань", "Екатеринбург", "Челябинск", "Магнитогорск", "Тюмень", "Курган", "Оренбург", "Орск", "Уральск", "Октябрьский", "Туймазы", "Стерлитамак", "Салават", "Нефтекамск", "Кама", "Нижневартовск", "Сургут", "Ханты-Мансийск", "Тобольск", "Чайковский", "Воткинск", "Глазов", "Курск", "Белгород", "Воронеж", "Липецк", "Тула", "Рязань", "Владимир", "Иваново", "Ярославль", "Кострома", "Тверь", "Смоленск", "Брянск", "Орёл", "Калуга", "Сергиев Посад", "Подольск", "Балашиха", "Люберцы", "Красногорск", "Мытищи", "Пушкино", "Клин", "Коломна", "Великий Новгород", "Псков", "Вологда", "Череповец", "Архангельск", "Северодвинск", "Мурманск", "Петрозаводск", "Сыктывкар", "Ухта", "Нарьян-Мар", "Иркутск", "Красноярск", "Новосибирск", "Омск", "Томск", "Кемерово", "Новокузнецк", "Барнаул", "Горно-Алтайск", "Абакан", "Кызыл", "Чита", "Улан-Удэ", "Якутск", "Магадан", "Петропавловск-Камчатский", "Южно-Сахалинск", "Хабаровск", "Владивосток", "Уссурийск", "Находка", "Артём", "Благовещенск", "Биробиджан", "Анадырь", "Норильск", "Ноябрьск", "Новый Уренгой", "Губкинский", "Салехард", "Копейск", "Миасс", "Златоуст", "Первоуральск", "Серов", "Нижний Тагил", "Алапаевск", "Ирбит", "Шадринск", "Ессентуки", "Кисловодск", "Карачаевск", "Нальчик", "Владикавказ", "Назрань", "Магас", "Элиста", "Слободской", "Норлат"];
+const SPEC=["Манипулятор","Экскаватор-погрузчик","Экскаватор гусеничный","Экскаватор колёсный","Бульдозер","Грейдер","Автокран","Кран-манипулятор","Самосвал","Автовышка","Гидромолотовоз","Бетономешалка","Автобетононасос","Тонар-самосвал","Трал (низкорамник)","Погрузчик вилочный","Погрузчик телескопический","Каток дорожный","Ямобур","Ассенизатор","Иловоз","Бензовоз"];
+const KY=["Тент","Рефрижератор","Борт","Изотерм","Зерновоз","Цистерна","Самосвал","Контейнеровоз","Пирамида (автовоз)","Открытый (без тента)"];
+const BADW=["дурак","идиот","скам","мошенник","тупой","лох"];
+function def(){return{screen:"rules",users:[],session:null,trial:null,theme:"dark",
+listings:[],claims:[],reviews:[],blacklist:[],warnings:[],saved:[],news:[],ads:[],
+uploads:{logo:"",banner:""},logs:[],appReviews:[],notifSeen:Date.now(),myExtra:[],onRoad:false}}
+let S;try{S=JSON.parse(localStorage.getItem("pg_app_v3"))||def()}catch(e){S=def()}
+if(!S.listings||!S.listings.length)S.listings=seed();
+function save(){localStorage.setItem("pg_app_v3",JSON.stringify(S))}
+function seed(){
+ const D=[["Казань","Москва",185,"наличные"],["Казань","Набережные Челны",78,"без НДС"],["Нижнекамск","Уфа",112,"с НДС"],["Альметьевск","Самара",124,"наличные"],["Елабуга","Екатеринбург",212,"без НДС"],["Набережные Челны","Санкт-Петербург",348,"с НДС"],["Зеленодольск","Нижний Новгород",124,"наличные"],["Бугульма","Оренбург",148,"без НДС"],["Чистополь","Ижевск",96,"наличные"],["Казань","Тольятти",142,"с НДС"],["Нурлат","Ульяновск",86,"наличные"],["Лениногорск","Чебоксары",108,"без НДС"],["Агрыз","Пермь",134,"с НДС"],["Мамадыш","Киров",118,"наличные"],["Азнакаево","Саратов",186,"без НДС"],["Иннополис","Казань",21,"наличные"]];
+ return D.map((d,i)=>({id:i+1,from:d[0],to:d[1],rate:d[2],pay:d[3],
+ date:["24 окт","25 окт","26 окт","27 окт","28 окт"][i%5],
+ name:["Рустам Г.","Ильнар Ф.","Дмитрий К.","Айдар Ш.","Сергей В.","Ринат М.","Марат З.","Олег Т.","Артур Н.","Владимир П.","Эдуард С.","Антон Р.","Николай Б.","Рашид Х.","Павел Л.","Ильдар Я."][i],
+ phone:"+7900000000"+i,
+ tonnage:[1.5,3,5,10,20][i%5],vol:[6,12,20,33,40,55,86,92][i%8],
+ body:KY[i%KY.length],temp:i%3==0?"от -20 °C до +8 °C":"без режима",
+ spec:i%4==3?SPEC[i%SPEC.length]:"",verified:i%2==0,trust:(i%15),
+ photo:i%6}));
 }
-
-/* ============ ЭКРАН ПРАВИЛ ============ */
-function scrWelcome(){
- return `<div class="screen"><div class="card" style="text-align:center">
-  ${db.settings.logo?`<img class="logo" src="${db.settings.logo}">`:`<div style="font-size:40px">🚚</div>`}
-  <h1>ПРОВЕРЕННЫЙ ГРУЗ</h1>
-  <p class="small">Перевозки по Татарстану и России</p></div>
-  <div class="card"><h2>Правила</h2>
-  <p>1. Уважайте собеседника: оскорбления ведут к предупреждениям и Ч/С.<br>
-  2. Не размещайте недостоверные грузы и рейсы.<br>
-  3. После 3 предупреждений — Чёрный список.<br>
-  4. Претензии рассматривает администрация.<br>
-  5. Пробный период — 24 часа, затем нужна регистрация.</p>
-  <label><input type="checkbox" id="rulesOk" style="width:auto"> Я прочитал и согласен с правилами</label>
-  <button class="btn" onclick="acceptRules()">Пробный период 24 часа</button>
-  <button class="btn gray" onclick="go({screen:'auth'})">Зарегистрироваться сейчас</button>
-  </div></div>`;
+function km(a,b){let s=a+b,h=7;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%893;return h+180}
+function me(){return S.users.find(u=>u.id===S.session)}
+function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),3200)}
+function phone(v){let d=v.replace(/\D/g,"");if(d[0]=="8")d="7"+d.slice(1);if(d[0]!="7")d="7"+d;return"+"+d.slice(0,11)}
+function truckSVG(i){
+ const pal=[["#f5b942","#ff8a3c"],["#4f8bff","#7b5cff"],["#39d98a","#1fb98a"],["#ff5c6c","#ff8a9c"],["#8ea2c9","#5b6a85"],["#ffd479","#f5b942"]];
+ const c=pal[i%6];
+ return '<svg class="truckph" viewBox="0 0 120 80"><defs><linearGradient id="g'+i+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+c[0]+'"/><stop offset="1" stop-color="'+c[1]+'"/></linearGradient></defs><rect x="2" y="14" rx="6" width="70" height="42" fill="url(#g'+i+')"/><rect x="72" y="26" rx="5" width="34" height="30" fill="'+c[1]+'"/><rect x="76" y="30" width="22" height="12" rx="2" fill="rgba(255,255,255,.35)"/><circle cx="24" cy="60" r="9" fill="#1a1f2e"/><circle cx="24" cy="60" r="4" fill="#57637d"/><circle cx="46" cy="60" r="9" fill="#1a1f2e"/><circle cx="46" cy="60" r="4" fill="#57637d"/><circle cx="94" cy="60" r="9" fill="#1a1f2e"/><circle cx="94" cy="60" r="4" fill="#57637d"/><rect x="2" y="56" width="104" height="3" rx="1.5" fill="rgba(0,0,0,.3)"/></svg>';
 }
-function acceptRules(){
- if(!document.getElementById('rulesOk').checked){toast('Поставьте галочку согласия');return;}
- db.trialStart=Date.now();save();go({screen:'auth'});
+function logoHTML(){
+ if(S.uploads.logo)return '<div class="logo"><img src="'+S.uploads.logo+'"></div>';
+ return '<div class="logo"><svg viewBox="0 0 48 48"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5b942"/><stop offset="1" stop-color="#ff8a3c"/></linearGradient></defs><rect width="48" height="48" rx="12" fill="url(#lg)"/><path d="M10 30 L18 14 L24 24 L30 14 L38 30" stroke="#1b1200" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="10" y="33" width="28" height="4" rx="2" fill="#1b1200"/></svg></div>';
 }
-function scrBlocked(){return `<div class="screen"><div class="card" style="text-align:center">
- <div style="font-size:44px">⏳</div><h1>Пробный период окончен</h1>
- <p>Прошло 24 часа. Чтобы продолжить пользоваться приложением, зарегистрируйтесь.</p>
- <button class="btn" onclick="go({screen:'auth'})">Зарегистрироваться</button></div></div>`;}
-
-/* ============ РЕГИСТРАЦИЯ ============ */
-function scrAuth(){
- return `<div class="screen"><div class="card">
- <h1>Регистрация</h1>
- <label>Я ...</label>
- <select id="rRole"><option value="driver">Водитель</option><option value="owner">Грузовладелец</option></select>
- <label>Фамилия</label><input id="rFam">
- <label>Имя</label><input id="rIm">
- <label>Статус</label><select id="rStatus"><option>Физлицо</option><option>Самозанятый</option><option>ИП</option><option>ООО</option></select>
- <label>Телефон</label><input id="rPhone" placeholder="+7 900 000-00-00">
- <div id="drvFields">
-  <label>Габариты Д×Ш×В (м)</label><input id="rDims" placeholder="13,6 × 2,45 × 2,7">
-  <label>Тоннаж (т)</label><input id="rTons" placeholder="20">
-  <label>Кузов</label><select id="rBody">${BODY_TYPES.map(b=>`<option>${b}</option>`).join('')}</select>
-  <label>Температурный режим</label><input id="rTemp" placeholder="от -20 до +12 °C (если применимо)">
-  <label>Есть спецтехника?</label><select id="rSpecQ" onchange="document.getElementById('specBox').classList.toggle('hidden',this.value!=='yes')"><option value="no">Нет</option><option value="yes">Да</option></select>
-  <div id="specBox" class="hidden"><label>Выберите виды (можно несколько)</label>
-  <div style="max-height:160px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:8px">${SPEC22.map((s,i)=>`<label><input type="checkbox" class="specChk" value="${esc(s)}" style="width:auto"> ${esc(s)}</label>`).join('')}</div></div>
- </div>
- <button class="btn" onclick="doReg()">Зарегистрироваться</button>
- <button class="btn gray" onclick="doLogin()">Уже есть аккаунт — войти по телефону</button>
- </div></div>`;
+function trustHTML(n){let h='<div class="circles">';for(let i=0;i<5;i++){let f=Math.max(0,Math.min(3,n-i*3));h+='<span class="circ">'+(f?'<i style="width:'+(f/3*100)+'%"></i>':"")+'</span>'}return h+"</div>"}
+function bannerHTML(){
+ let ad=S.ads.length?'<div class="tag">РЕКЛАМНАЯ ИНТЕГРАЦИЯ · '+esc(S.ads[S.ads.length-1].title)+'</div>':"";
+ if(S.uploads.banner)return '<div class="banner"><img src="'+S.uploads.banner+'">'+ad+'</div>';
+ return '<div class="banner"><svg viewBox="0 0 400 120" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5b942"/><stop offset="1" stop-color="#ff8a3c"/></linearGradient></defs><rect width="400" height="120" fill="url(#bg1)"/><path d="M300 84 L318 52 L324 64 L336 52 L352 84 Z" fill="rgba(20,15,0,.55)"/><circle cx="312" cy="90" r="6" fill="rgba(20,15,0,.55)"/><circle cx="340" cy="90" r="6" fill="rgba(20,15,0,.55)"/><text x="26" y="52" font-size="22" font-weight="800" fill="#1b1200">ПРОВЕРЕННЫЙ ГРУЗ</text><text x="26" y="76" font-size="13" fill="rgba(20,15,0,.7)">Грузоперевозки по Татарстану и России</text></svg>'+ad+'</div>';
 }
-function doReg(){
- const fam=v('rFam'),im=v('rIm'),ph=v('rPhone');
- if(!fam||!im||phoneNorm(ph).length!==10){toast('Заполните ФИО и телефон из 10 цифр');return;}
- if(db.users.some(u=>u.phone===phoneNorm(ph))){toast('Такой телефон уже зарегистрирован');return;}
- const spec=[...document.querySelectorAll('.specChk:checked')].map(c=>c.value);
- const u={id:uid(),fam,im,role:v('rRole'),status:v('rStatus'),phone:phoneNorm(ph),
-  dims:v('rDims'),tons:v('rTons'),body:v('rBody'),temp:v('rTemp'),spec,
-  verified:false,trust:9,inTransit:false,warnings:0,extra:[],deletedAt:null,restoreUntil:null};
- db.users.push(u);db.session=u.id;save();toast('Добро пожаловать!');go({screen:'feed',tab:'feed'});
-}
-function doLogin(){
- const ph=phoneNorm(v('rPhone'));const u=db.users.find(x=>x.phone===ph);
- if(!u){toast('Аккаунт не найден — зарегистрируйтесь');return;}
- if(u.deletedAt){if(Date.now()>u.restoreUntil){u.deletedAt=null;save();}else{db.session=u.id;save();toast('Профиль в восстановлении — 7 дней с удаления');go({screen:'feed'});return;}}
- db.session=u.id;save();toast('С возвращением, '+u.im+'!');go({screen:'feed',tab:'feed'});
-}
-function v(id){const e=document.getElementById(id);return e?e.value.trim():'';}
-
-/* ============ ЛЕНТА ============ */
-function banner(){
- if(db.settings.banner)return `<div class="banner"><img src="${db.settings.banner}"></div>`;
- return `<div class="banner">🚚 ПРОВЕРЕННЫЙ ГРУЗ — надёжные перевозки</div>`;
-}
-function trustCircles(pts){
- let h='';for(let i=0;i<5;i++){const f=pts>=3*(i+1)?'f3':pts>=3*i+2?'f2':pts>=3*i+1?'f1':'';h+=`<div class="circle ${f}"></div>`;}
- return `<div class="circles">${h}</div>`;
-}
-function scrFeed(){
- const u=me();const f=nav.loadFilter;
- let loads=db.loads.filter(l=>!l.archived);
- if(f.from)loads=loads.filter(l=>l.from===f.from);
- if(f.to)loads=loads.filter(l=>l.to===f.to);
- loads.sort((a,b)=>(a.date>b.date?-1:1));
- return `<div class="screen">
- ${banner()}
- <div class="card">
-  <label>Откуда</label><select id="fFrom"><option value="">Весь Татарстан</option>${CITIES.map(c=>`<option ${f.from===c?'selected':''}>${c}</option>`).join('')}</select>
-  <label>Куда</label><select id="fTo"><option value="">Россия (все города)</option>${CITIES.map(c=>`<option ${f.to===c?'selected':''}>${c}</option>`).join('')}</select>
-  <div class="row"><button class="btn small" onclick="doSearch()">Найти</button>
-  <button class="btn gray small" onclick="saveSearch()">🔔 Сохранить поиск</button>
-  ${u.role==='owner'?`<button class="btn small" onclick="go({screen:'newload'})">+ Разместить груз</button>`:''}</div>
- </div>
- <h2>Новости</h2>
- ${db.news.length?db.news.map(n=>`<div class="card"><b>${esc(n.title)}</b><p class="small">${new Date(n.date).toLocaleDateString('ru')}</p>${n.cover?`<img src="${n.cover}" style="width:100%;border-radius:10px;margin:6px 0">`:''}<p>${esc(n.text)}</p></div>`).join(''):'<div class="card small">Пока пусто</div>'}
- <h2>Грузы (${loads.length})</h2>
- ${loads.length?loads.map(loadCard).join(''):'<div class="card small">Ничего не найдено. Сохраните поиск — уведомим, когда появится груз.</div>'}
- ${db.ads.length?`<h2>Реклама</h2>`+db.ads.map(a=>`<div class="card"><b>${esc(a.title)}</b><br><small>${esc(a.text)}</small><br><a href="${esc(a.url)}" target="_blank">Перейти →</a></div>`).join(''):''}
- </div>`;
-}
-function doSearch(){nav.loadFilter={from:v('fFrom'),to:v('fTo')};render();}
-function saveSearch(){
- db.searches.push({id:uid(),userId:me().id,from:v('fFrom'),to:v('fTo'),on:true});
- save();toast('Поиск сохранён — уведомим о новых грузах');render();
-}
-function loadCard(l){
- const ow=db.users.find(x=>x.id===l.ownerId)||{im:'—',fam:'',verified:false,trust:0,phone:''};
- const fav=me().favs||[];const isF=fav.includes(l.id);
- return `<div class="card">
- <div class="row"><b style="flex:1">${esc(l.from)} → ${esc(l.to)}</b>
- <span style="cursor:pointer" onclick="toggleFav('${l.id}')">${isF?'⭐':'☆'}</span></div>
- <div>${l.km} км · <b>${l.rate} ₽/км</b> · ${PAY[l.pay]}</div>
- <div class="small">Погрузка: ${l.date}${l.desc?' · '+esc(l.desc):''}</div>
- ${l.photo?`<img src="${l.photo}" style="width:100%;border-radius:10px;margin-top:8px">`:''}
- <div class="row" style="margin-top:8px">
-  <div style="flex:1">${ow.verified?'<span class="verified">✔ Проверенный</span>':''} ${trustCircles(ow.trust||0)}
-  <div class="small">${esc(ow.fam)} ${esc(ow.im)}</div></div>
-  <a class="btn small" href="tel:+7${ow.phone}">📞 Звонок</a>
-  <a class="btn small" href="https://wa.me/7${ow.phone}" target="_blank">WhatsApp</a>
- </div></div>`;
-}
-function toggleFav(id){
- const u=me();u.favs=u.favs||[];
- u.favs.includes(id)?u.favs.splice(u.favs.indexOf(id),1):u.favs.push(id);
- save();render();
-}
-
-/* ============ РАЗМЕЩЕНИЕ ГРУЗА ============ */
-function scrNewLoad(){
- return `<div class="screen"><div class="card"><h1>Новый груз</h1>
- <label>Откуда</label><select id="lFrom">${CITIES.map(c=>`<option>${c}</option>`).join('')}</select>
- <label>Куда</label><select id="lTo">${CITIES.map(c=>`<option>${c}</option>`).join('')}</select>
- <label>Расстояние (км)</label><input id="lKm" type="number">
- <label>Ставка (₽/км)</label><input id="lRate" type="number" step="0.1">
- <label>Дата погрузки</label><input id="lDate" type="date">
- <label>Оплата</label><select id="lPay">${PAY.map((p,i)=>`<option value="${i}">${p}</option>`).join('')}</select>
- <label>Комментарий</label><input id="lDesc">
- <label>Фото</label><input id="lPhoto" type="file" accept="image/*" onchange="pickImg(this,'photoTmp')">
- <img id="photoTmp" style="width:100%;border-radius:10px;display:none">
- <button class="btn" onclick="doLoad()">Опубликовать</button></div></div>`;
-}
-function pickImg(inp,tmpId){
- const f=inp.files[0];if(!f)return;const r=new FileReader();
- r.onload=()=>{window[tmpId]=r.result;const im=document.getElementById(tmpId);im.src=r.result;im.style.display='block';};
- r.readAsDataURL(f);
-}
-function doLoad(){
- const from=v('lFrom'),to=v('lTo'),km=+v('lKm'),rate=+v('lRate');
- if(!km||!rate){toast('Укажите км и ставку');return;}
- const l={id:uid(),ownerId:me().id,from,to,km,rate,date:v('lDate')||'сегодня',pay:+v('lPay'),desc:v('lDesc'),photo:window.photoTmp||null,created:Date.now()};
- db.loads.unshift(l);
- // уведомления по сохранённым поискам
- db.searches.filter(s=>s.on&&(!s.from||s.from===from)&&(!s.to||s.to===to)).forEach(s=>{
-  if(s.userId!==me().id)db.notifs.push({id:uid(),userId:s.userId,text:`Новый груз: ${from} → ${to}, ${rate} ₽/км`,date:Date.now(),read:false});
- });
- save();toast('Груз опубликован!');go({screen:'feed',tab:'feed'});
-}
-
-/* ============ ИЗБРАННОЕ / УВЕДОМЛЕНИЯ / ЗАЯВКИ ============ */
-function scrFavs(){
- const u=me();const list=db.loads.filter(l=>(u.favs||[]).includes(l.id));
- return `<div class="screen"><h1>Избранное</h1>${list.length?list.map(loadCard).join(''):'<div class="card small">Пока пусто. Добавляйте грузы звёздочкой ☆</div>'}</div>`;
-}
-function scrNotifs(){
- const list=db.notifs.filter(n=>n.userId===me().id).sort((a,b)=>b.date-a.date);
- return `<div class="screen"><h1>Уведомления</h1>
- ${list.length?list.map(n=>`<div class="card"><b>${esc(n.text)}</b><div class="small">${new Date(n.date).toLocaleString('ru')}</div></div>`).join(''):'<div class="card small">Пока нет уведомлений</div>'}</div>`;
-}
-function scrClaims(){
- const u=me();const mine=db.claims.filter(c=>c.userId===u.id);
- return `<div class="screen"><h1>Претензии</h1>
- <div class="card"><h2>Новая претензия</h2>
- <textarea id="clText" rows="3" placeholder="Опишите проблему"></textarea>
- <button class="btn" onclick="addClaim()">Отправить</button>
- <p class="small">Снять претензию может только администрация. После решения кружки доверия возвращаются.</p></div>
- ${mine.map(c=>`<div class="card"><b>${esc(c.text)}</b>
- <span class="pill ${c.status==='Решено'?'ok':'warn'}">${c.status}</span>
- <div class="small">${new Date(c.date).toLocaleString('ru')}</div></div>`).join('')}
- </div>`;
-}
-function addClaim(){
- const t=v('clText');if(!t){toast('Опишите проблему');return;}
- db.claims.push({id:uid(),userId:me().id,text:t,status:'Активная',date:Date.now()});
- db.viol.push({type:'claim',text:'Претензия от '+me().im,date:Date.now()});
- save();toast('Претензия отправлена админу');render();
-}
-
-/* ============ ПРОФИЛЬ ============ */
-function scrProfile(){
- const u=me();
- const savedT=u.trust;
- return `<div class="screen">
- <div class="card" style="text-align:center">
-  ${db.settings.logo?`<img class="logo" src="${db.settings.logo}">`:''}
-  <h1>${esc(u.fam)} ${esc(u.im)}</h1>
-  ${u.verified?'<span class="verified">✔ Проверенный</span> <span class="pill ok">Галочка</span>':'<span class="pill warn">Без галочки</span>'}
-  <div style="margin:10px 0">${trustCircles(savedT)}<div class="small">Доверие: ${savedT}/15</div></div>
-  <div class="pill">${u.role==='driver'?'Водитель':'Грузовладелец'}</div>
-  <div class="pill">${esc(u.status)}</div>
-  ${u.role==='driver'?`<div class="small">${esc(u.dims||'')} · ${esc(u.tons||'')} т · ${esc(u.body||'')} · ${esc(u.temp||'')}</div>
-  ${u.spec&&u.spec.length?'<div>'+u.spec.map(s=>`<span class="pill">${esc(s)}</span>`).join('')+'</div>':''}
-  <button class="btn ${u.inTransit?'red':''}" onclick="toggleTransit()">${u.inTransit?'🚚 В пути (нажмите, чтобы снять)':'Я в пути'}</button>`:''}
-  <div class="small">+7 ${u.phone.slice(0,3)} ${u.phone.slice(3,6)}-${u.phone.slice(6,8)}-${u.phone.slice(8)}</div>
- </div>
- ${u.role==='driver'?`<div class="card"><h2>Доп. номера (до 5)</h2>
-  <div id="extraList">${(u.extra||[]).map((p,i)=>`<div class="row"><span style="flex:1">+7 ${p}</span><button class="btn red small" onclick="delExtra(${i})">✕</button></div>`).join('')||'<span class="small">Нет номеров</span>'}</div>
-  <input id="exPhone" placeholder="+7 900 000-00-00"><button class="btn" onclick="addExtra()">Добавить номер</button></div>`:''}
- <div class="card"><h2>Настройки</h2>
-  <button class="btn gray" onclick="toggleTheme()">🌗 Тема: ${document.documentElement.dataset.theme==='dark'?'тёмная':'светлая'}</button>
-  <button class="btn gray" onclick="go({screen:'charity'})">❤️ Благотворительность</button>
-  <button class="btn gray" onclick="go({screen:'support'})">💬 Рекламная интеграция и поддержка</button>
-  <button class="btn gray" onclick="go({screen:'apprev'})">⭐ Отзывы о приложении</button>
-  ${u.role==='owner'||u.role==='driver'?`<button class="btn gray" onclick="go({screen:'reviews'})">📝 Отзывы обо мне и мои отзывы</button>`:''}
-  <button class="btn red" onclick="delProfile()">Удалить профиль</button>
-  <button class="btn gray" onclick="go({screen:'admin'})">🛠 Админ-панель</button>
- </div>
- <div class="card small">Подписывайся на наш канал в Telegram: <a href="${TATAR}" target="_blank">${TATAR}</a></div>
- </div>`;
-}
-function toggleTransit(){me().inTransit=!me().inTransit;save();render();}
-function addExtra(){
- const u=me();u.extra=u.extra||[];const p=phoneNorm(v('exPhone'));
- if(p.length!==10){toast('Введите 10 цифр');return;}
- if(u.extra.length>=5){toast('Максимум 5 номеров');return;}
- u.extra.push(p);save();render();
-}
-function delExtra(i){me().extra.splice(i,1);save();render();}
-function toggleTheme(){document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';render();}
-function delProfile(){
- const u=me();u.deletedAt=Date.now();u.restoreUntil=Date.now()+7*86400000;
- save();db.session=null;toast('Профиль удалён. Восстановление возможно в течение 7 дней');render();
-}
-function scrRestore(){
- const u=db.users.find(x=>x.id===db.session);
- return `<div class="screen"><div class="card"><h1>Профиль удалён</h1>
- <p>Восстановление возможно до ${new Date(u.restoreUntil).toLocaleDateString('ru')}</p>
- <button class="btn" onclick="restoreProfile()">Восстановить профиль</button>
- <button class="btn gray" onclick="logout()">Выйти</button></div></div>`;
-}
-function restoreProfile(){const u=me();u.deletedAt=null;u.restoreUntil=null;save();go({screen:'feed'});}
-function logout(){db.session=null;save();go({screen:'welcome'});}
-
-/* ============ ОТЗЫВЫ / ЧС / ЦЕНЗУРА ============ */
-function scrReviews(){
- const u=me();
- const about=db.reviews.filter(r=>r.targetId===u.id);
- const mine=db.reviews.filter(r=>r.authorId===u.id);
- return `<div class="screen"><h1>Отзывы</h1>
- <div class="card"><h2>Оставить отзыв о пользователе</h2>
- <label>Телефон пользователя</label><input id="rvPhone" placeholder="9000000000">
- <label>Оценка</label><select id="rvStars"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>
- <label>Текст</label><input id="rvText">
- <button class="btn" onclick="addReview()">Отправить отзыв</button>
- <p class="small">Удалить отзыв может только администрация.</p></div>
- <h2>Обо мне (${about.length})</h2>
- ${about.map(r=>`<div class="card"><b>${'★'.repeat(+r.stars)}${'☆'.repeat(5-r.stars)}</b> ${esc(r.text)}<div class="small">${new Date(r.date).toLocaleString('ru')}</div></div>`).join('')||'<div class="card small">Нет отзывов</div>'}
- <h2>Мои отзывы</h2>
- ${mine.map(r=>`<div class="card"><b>${'★'.repeat(+r.stars)}</b> ${esc(r.text)}</div>`).join('')||'<div class="card small">Вы ещё ничего не писали</div>'}
- </div>`;
-}
-function addReview(){
- const ph=phoneNorm(v('rvPhone'));const t=db.users.find(x=>x.phone===ph);
- if(!t){toast('Пользователь не найден');return;}
- const text=v('rvText');const bad=BAD.some(w=>text.toLowerCase().includes(w));
- if(bad){
-  me().warnings++;db.viol.push({type:'censor',text:'Нарушение в отзыве: '+me().im,date:Date.now()});
-  if(me().warnings>=3){db.blacklist.push({name:me().fam+' '+me().im,phone:me().phone,reason:'3 предупреждения',date:Date.now()});toast('Вы добавлены в Ч/С');}
-  else toast('Предупреждение '+me().warnings+'/3: нарушены правила');
-  save();render();return;
- }
- db.reviews.push({id:uid(),targetId:t.id,authorId:me().id,author:me().im,stars:+v('rvStars'),text,date:Date.now()});
- save();toast('Отзыв опубликован');render();
-}
-
-/* ============ ЧАРИТИ / ПОДДЕРЖКА ============ */
-function scrCharity(){return `<div class="screen"><div class="card"><h1>❤️ Благотворительность</h1>
- <p>Мы помогаем детским домам Татарстана. С каждого оплаченного рейса 1 ₽ идёт на добрые дела.</p>
- <p class="small">Собрано: 0 ₽</p></div></div>`;}
-function scrSupport(){return `<div class="screen"><div class="card"><h1>💬 Поддержка и реклама</h1>
- <p>По вопросам рекламы и поддержки пишите в Telegram:</p>
- <a class="btn" href="${TATAR}" target="_blank">Написать в Telegram</a>
- <p class="small">Подписывайся на наш канал!</p></div></div>`;}
-function scrAppRev(){
- return `<div class="screen"><div class="card"><h1>Отзывы о приложении</h1>
- <label>Оценка</label><select id="arStars"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>
- <label>Текст</label><input id="arText">
- <button class="btn" onclick="addAppRev()">Оставить отзыв</button></div>
- ${db.appReviews.map(r=>`<div class="card"><b>${'★'.repeat(+r.stars)}</b> ${esc(r.text)}</div>`).join('')}</div>`;
-}
-function addAppRev(){const t=v('arText');if(!t){toast('Напишите текст');return;}
- db.appReviews.push({stars:v('arStars'),text:t,date:Date.now()});save();toast('Спасибо за отзыв!');render();}
-
-/* ============ АДМИН-ПАНЕЛЬ ============ */
-function scrAdmin(){
- if(!nav.admin){
-  return `<div class="screen"><div class="card"><h1>🛠 Админ-панель</h1>
-  <label>Код доступа</label><input id="admCode" type="password" placeholder="Введите код">
-  <button class="btn" onclick="admLogin()">Войти</button>
-  <button class="btn gray" onclick="go({screen:'feed',tab:'profile'})">Назад</button></div></div>`;
- }
- const u=me();
- return `<div class="screen"><h1>🛠 Админ-панель</h1>
- <div class="tabs"><button class="on" onclick="admTab('users')">Пользователи</button>
- <button onclick="admTab('claims')">Претензии</button><button onclick="admTab('news')">Новости</button>
- <button onclick="admTab('ads')">Реклама</button><button onclick="admTab('viol')">Журнал</button>
- <button onclick="admTab('look')">Оформление</button></div>
- <div id="admBody"></div>
- <button class="btn gray" onclick="go({screen:'feed',tab:'profile'})">Выйти из админки</button></div>`;
-}
-function admLogin(){
- if(djb2(v('admCode'))!==ADMIN_HASH){toast('Неверный код');return;}
- nav.admin=true;save();go({screen:'admin',tab:'profile'});admTab('users');
-}
-function admTab(t){
- document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('on'));
- event.target.classList.add('on');
- const b=document.getElementById('admBody');
- if(t==='users'){
-  b.innerHTML=`<div class="card"><h2>Пользователи</h2><table><tr><th>Имя</th><th>Телефон</th><th>✔</th><th>Доверие</th><th></th></tr>
-  ${db.users.map(x=>`<tr><td>${esc(x.fam)} ${esc(x.im)}<br><span class="small">${x.role==='driver'?'Водитель':'Грузовл.'}</span></td>
-  <td>+7${x.phone}</td>
-  <td>${x.verified?'✔':'—'}</td><td>${x.trust}/15</td>
-  <td><button class="btn small" onclick="admVerify('${x.id}')">✔/✕ галочка</button>
-  <button class="btn red small" onclick="admWarn('${x.id}')">⚠ предупр.</button>
-  <button class="btn red small" onclick="admBlack('${x.id}')">Ч/С</button></td></tr>`).join('')}
-  </table></div>`;
- }
- if(t==='claims'){
-  b.innerHTML=`<div class="card"><h2>Претензии</h2>
-  ${db.claims.map(c=>{const au=db.users.find(x=>x.id===c.userId)||{im:'—'};return `<div class="card"><b>${esc(au.fam||'')} ${esc(au.im)}</b>: ${esc(c.text)} <span class="pill ${c.status==='Решено'?'ok':'warn'}">${c.status}</span>
-  ${c.status!=='Решено'?`<button class="btn small" onclick="admSolve('${c.id}')">Решено (вернуть кружки)</button>`:''}</div>`;}).join('')||'<span class="small">Нет претензий</span>'}</div>`;
- }
- if(t==='news'){
-  b.innerHTML=`<div class="card"><h2>Новость</h2>
-  <input id="nTitle" placeholder="Заголовок"><textarea id="nText" rows="3" placeholder="Текст"></textarea>
-  <input type="file" accept="image/*" onchange="pickImg(this,'newsCover')"><img id="newsCover" style="width:100%;border-radius:10px;display:none">
-  <button class="btn" onclick="admNews()">Опубликовать</button></div>`;
- }
- if(t==='ads'){
-  b.innerHTML=`<div class="card"><h2>Рекламная интеграция</h2>
-  <input id="aTitle" placeholder="Название"><input id="aText" placeholder="Описание"><input id="aUrl" placeholder="Ссылка">
-  <button class="btn" onclick="admAd()">Добавить</button></div>`;
- }
- if(t==='viol'){
-  b.innerHTML=`<div class="card"><h2>Журнал нарушений</h2><table><tr><th>Тип</th><th>Событие</th><th>Дата</th></tr>
-  ${db.viol.map(x=>`<tr><td>${x.type}</td><td>${esc(x.text)}</td><td>${new Date(x.date).toLocaleString('ru')}</td></tr>`).join('')}</table>
-  <h2>Ч/С</h2>${db.blacklist.map(x=>`<div class="card"><b>${esc(x.name)}</b> +7${x.phone} — ${esc(x.reason)} <span class="pill red">Ч/С</span></div>`).join('')||'<span class="small">Пусто</span>'}</div>`;
- }
- if(t==='look'){
-  b.innerHTML=`<div class="card"><h2>Оформление</h2>
-  <label>Логотип</label><input type="file" accept="image/*" onchange="pickImg(this,'setLogo')"><img id="setLogo" style="height:44px;border-radius:10px;display:none" src="${db.settings.logo||''}">
-  <label>Баннер ленты</label><input type="file" accept="image/*" onchange="pickImg(this,'setBanner')"><img id="setBanner" style="width:100%;border-radius:10px;display:none" src="${db.settings.banner||''}">
-  <label>Telegram канала</label><input id="setTg" value="${esc(db.settings.tg)}">
-  <button class="btn" onclick="admLook()">Сохранить оформление</button></div>`;
- }
-}
-function admVerify(id){const x=db.users.find(z=>z.id===id);x.verified=!x.verified;save();admTab('users');}
-function admWarn(id){const x=db.users.find(z=>z.id===id);x.warnings++;db.viol.push({type:'warn',text:'Предупреждение: '+x.im,date:Date.now()});
- if(x.warnings>=3){db.blacklist.push({name:x.fam+' '+x.im,phone:x.phone,reason:'3 предупреждения',date:Date.now()});}
- save();admTab('users');}
-function admBlack(id){const x=db.users.find(z=>z.id===id);x.trust=0;db.blacklist.push({name:x.fam+' '+x.im,phone:x.phone,reason:'Решение админа',date:Date.now()});
- db.viol.push({type:'blacklist',text:x.im+' в Ч/С',date:Date.now()});save();admTab('users');}
-function admSolve(id){const c=db.claims.find(z=>z.id===id);c.status='Решено';
- const x=db.users.find(z=>z.id===c.userId);if(x){x.trust=Math.min(15,x.trust+3);}
- save();admTab('claims');}
-function admNews(){db.news.unshift({id:uid(),title:v('nTitle'),text:v('nText'),cover:window.newsCover||null,date:Date.now()});save();toast('Новость опубликована');admTab('news');}
-function admAd(){db.ads.push({id:uid(),title:v('aTitle'),text:v('aText'),url:v('aUrl')});save();toast('Реклама добавлена');admTab('ads');}
-function admLook(){if(window.setLogo)db.settings.logo=window.setLogo;if(window.setBanner)db.settings.banner=window.setBanner;db.settings.tg=v('setTg')||db.settings.tg;save();toast('Оформление обновлено');render();}
-
-/* ============ НИЖНЯЯ ПАНЕЛЬ ============ */
-function navBar(){
- const t=nav.tab;
- return `<div class="nav">
- <button class="${t==='feed'?'on':''}" onclick="go({screen:'feed',tab:'feed'})"><span class="ic">🏠</span>Лента</button>
- <button class="${t==='favs'?'on':''}" onclick="go({screen:'favs',tab:'favs'})"><span class="ic">⭐</span>Избранное</button>
- <button class="${t==='claims'?'on':''}" onclick="go({screen:'claims',tab:'claims'})"><span class="ic">⚖️</span>Претензии</button>
- <button class="${t==='notifs'?'on':''}" onclick="go({screen:'notifs',tab:'notifs'})"><span class="ic">🔔</span>Уведомл.</button>
- <button class="${t==='profile'?'on':''}" onclick="go({screen:'profile',tab:'profile'})"><span class="ic">👤</span>Профиль</button>
- </div>`;
-}
-
-/* ============ РЕНДЕР ============ */
+function go(s){S.screen=s;save();render()}
+function censored(text,uid){
+ const low=(text||"").toLowerCase();
+ for(const w of BADW)if(low.includes(w)){
+  if(uid){let u=S.users.find(x=>x.id===uid);if(u){u.warn=(u.warn||0)+1;
+   S.logs.unshift({t:Date.now(),txt:"Предупреждение «"+w+"» → "+u.name+(u.warn>=3?" → Ч/С":"")});
+   if(u.warn>=3&&!S.blacklist.includes(u.phone))S.blacklist.push(u.phone);}}
+  return true}
+ return false}
+function checkTrial(){
+ if(S.session)return false;
+ if(!S.trial){S.screen="rules";return true}
+ if(Date.now()-S.trial>86400000){S.screen="blocked";return true}
+ return false}
 function render(){
- document.documentElement.dataset.theme=document.documentElement.dataset.theme||'dark';
- const s=route();let h='';
- if(s==='welcome')h=scrWelcome();
- else if(s==='blocked')h=scrBlocked();
- else if(s==='auth')h=scrAuth();
- else if(s==='restore')h=scrRestore();
- else if(s==='admin')h=scrAdmin();
- else if(s==='feed')h=scrFeed();
- else if(s==='newload')h=scrNewLoad();
- else if(s==='favs')h=scrFavs();
- else if(s==='claims')h=scrClaims();
- else if(s==='notifs')h=scrNotifs();
- else if(s==='profile')h=scrProfile();
- else if(s==='reviews')h=scrReviews();
- else if(s==='apprev')h=scrAppRev();
- else if(s==='charity')h=scrCharity();
- else if(s==='support')h=scrSupport();
- document.getElementById('app').innerHTML=h+(db.session?navBar():'');
+ document.body.className=S.theme;
+ const app=document.getElementById("app"),nav=document.getElementById("nav");
+ if(checkTrial())return;
+ nav.style.display=["feed","saved","fav","claims","profile"].includes(S.screen)?"flex":"none";
+ let h="";
+ if(S.screen=="rules")h=scrRules();
+ else if(S.screen=="blocked")h=scrBlocked();
+ else if(S.screen=="reg")h=scrReg();
+ else if(S.screen=="feed")h=scrFeed();
+ else if(S.screen=="saved")h=scrSaved();
+ else if(S.screen=="fav")h=scrFav();
+ else if(S.screen=="claims")h=scrClaims();
+ else if(S.screen=="profile")h=scrProfile();
+ else if(S.screen=="admin")h=scrAdmin();
+ app.innerHTML=h;
+ if(["feed","saved","fav","claims","profile"].includes(S.screen))nav.innerHTML=navHTML();
 }
-render();
+function navHTML(){
+ const t=[["feed","🚚","Лента"],["saved","🔔","Поиски"],["fav","⭐","Избранное"],["claims","📄","Претензии"],["profile","👤","Профиль"]];
+ return t.map(x=>'<button class="'+(S.screen==x[0]?"act":"")+'" onclick="go(\''+x[0]+'\')"><span class="ic">'+x[1]+'</span>'+x[2]+'</button>').join("");
+}
+function scrRules(){return `
+ <div style="height:26vh"></div>
+ <div class="glass" style="padding:26px">${logoHTML().replace('class="logo"','class="logo" style="margin:0 auto 16px;width:72px;height:72px;border-radius:20px"')}
+ <div class="cent"><h1>ПРОВЕРЕННЫЙ ГРУЗ</h1><p class="mut" style="margin-top:6px">Перевозки Татарстан и вся Россия</p></div>
+ <hr>
+ <div class="checkrow"><input type="checkbox" id="ck1"><div><b>Правила приложения</b><p class="mut" style="margin-top:4px">Настоящие грузы, честные ставки ₽/км и точные километры. Претензии решает администрация. За 3 предупреждения — Чёрный список. Оплата: наличные, с НДС или без НДС.</p></div></div>
+ <div class="checkrow"><input type="checkbox" id="ck2"><div><b>Согласие с условиями</b><p class="mut" style="margin-top:4px">Я подтверждаю, что ознакомлен с правилами и согласен на обработку данных профиля.</p></div></div>
+ <button class="btn" style="margin-top:14px" onclick="startTrial()">🚀 Пробный период 24 часа</button>
+ <button class="btn ghost" style="margin-top:10px" onclick="go('reg')">Уже есть аккаунт — войти</button>
+ </div>
+ <p class="mut cent" style="margin-top:14px">После пробного периода откроется регистрация<br>водителя или грузовладельца</p>`}
+function startTrial(){if(!document.getElementById("ck1").checked||!document.getElementById("ck2").checked){toast("Отметьте обе галочки");return}S.trial=Date.now();save();go("feed");setTimeout(()=>toast("Пробный период активен: 24 часа"),400)}
+function scrBlocked(){
+ if(!S.trial)S.trial=Date.now()-86400000,save();
+ const left=Math.max(0,86400000-(Date.now()-S.trial));
+ const hh=Math.floor(left/3600000),mm=Math.floor(left%3600000/60000);
+ return `<div style="height:20vh"></div><div class="glass" style="padding:26px;text-align:center">
+ <div style="font-size:52px">🔒</div><h2 style="margin-top:10px">Пробный период завершён</h2>
+ <p class="mut" style="margin-top:8px">Чтобы продолжить пользоваться ПРОВЕРЕННЫЙ ГРУЗ, зарегистрируйтесь — это займёт минуту.</p>
+ <p class="mut" style="margin-top:8px">Доступ был: <span class="timer">${hh} ч ${mm} мин</span></p>
+ <button class="btn" style="margin-top:18px" onclick="go('reg')">Зарегистрироваться</button>
+ <button class="btn ghost" style="margin-top:10px" onclick="S.trial=null;save();go('rules')">На главную</button></div>`}
+let REG={};
+function scrReg(){
+ const u=REG;
+ return `<div class="top">${logoHTML()}<h2 style="margin:0">Регистрация</h2></div>
+ <div class="glass" style="padding:18px">
+ <div class="grid2"><div><label>Роль</label><select id="r_role" onchange="REG.role=this.value;REG.fam=document.getElementById('r_fam').value;REG.name=document.getElementById('r_name').value;REG.tel=document.getElementById('r_tel').value;render()"><option value="Водитель" ${u.role!="Грузовладелец"?"selected":""}>Водитель</option><option value="Грузовладелец" ${u.role=="Грузовладелец"?"selected":""}>Грузовладелец</option></select></div>
+ <div><label>Статус</label><select id="r_st"><option>Физлицо</option><option>Самозанятый</option><option>ИП</option><option>ООО</option></select></div></div>
+ <div class="grid2"><div><label>Фамилия</label><input id="r_fam" value="${esc(u.fam||"")}"></div><div><label>Имя</label><input id="r_name" value="${esc(u.name||"")}"></div></div>
+ <label>Телефон</label><input id="r_tel" type="tel" placeholder="+7 (900) 000-00-00" value="${esc(u.tel||"")}" oninput="this.value=phone(this.value)">
+ <div id="drv">${REG.role!="Грузовладелец"?`
+ <h3 style="margin-top:16px">🚛 Транспорт</h3>
+ <div class="grid2"><div><label>Габариты Д×Ш×В, м</label><input id="r_dim" placeholder="13,6 × 2,45 × 2,7" value="${esc(u.dim||"")}"></div><div><label>Тоннаж, т</label><input id="r_ton" type="number" placeholder="20" value="${u.ton||""}"></div></div>
+ <label>Тип кузова</label><select id="r_body">${KY.map(k=>'<option'+(u.body==k?" selected":"")+'>'+k+'</option>').join("")}</select>
+ <label>Температурный режим</label><input id="r_temp" placeholder="от -20 °C до +8 °C / без режима" value="${esc(u.temp||"")}">
+ <label>Нужна спецтехника? Если да — укажите вид</label><select id="r_spec"><option value="">Нет, только перевозка</option>${SPEC.map(s=>'<option'+(u.spec==s?" selected":"")+'>'+s+'</option>').join("")}</select>`:""}
+ </div>
+ <button class="btn" style="margin-top:18px" onclick="doReg()">Создать аккаунт ✓</button>
+ <button class="btn ghost" style="margin-top:10px" onclick="go(S.users.length?'feed':'rules')">Назад</button></div>`}
+function doReg(){
+ const fam=document.getElementById("r_fam").value.trim(),nm=document.getElementById("r_name").value.trim(),
+ tel=phone(document.getElementById("r_tel").value),role=REG.role||"Водитель";
+ if(!fam||!nm||tel.length<12){toast("Заполните фамилию, имя и телефон");return}
+ if(S.blacklist.includes(tel)){toast("Этот номер в Чёрном списке");return}
+ let u=S.users.find(x=>x.phone==tel);
+ if(u){delete u.delAt}else{u={id:Date.now(),fam,name:nm,tel,role,st:document.getElementById("r_st").value,warn:0,trust:2,verified:false,reviews:[],claims:[],extra:[],onRoad:false};
+  if(role!="Грузовладелец"){u.dim=document.getElementById("r_dim").value;u.ton=document.getElementById("r_ton").value;u.body=document.getElementById("r_body").value;u.temp=document.getElementById("r_temp").value;u.spec=document.getElementById("r_spec").value}
+  S.users.push(u)}
+ S.session=u.id;save();go("feed");toast("Добро пожаловать, "+nm+"!")}
+function userCard(u){return '<div class="row"><div class="avatar">'+esc((u.fam[0]||"")+(u.name[0]||""))+'</div><div style="flex:1"><b>'+esc(u.fam+" "+u.name)+'</b> '+(u.verified?'<span class="check">✓</span>':"")+'<div class="mut">'+esc(u.role)+" · "+esc(u.st||"")+'</div>'+trustHTML(u.trust||0)+(u.onRoad?'<span class="badge b-ok" style="margin-top:4px">● В пути</span>':"")+'</div></div>'}
+function listingsHTML(list,favset){
+ if(!list.length)return '<p class="mut cent" style="margin:30px 0">Грузов по этому запросу пока нет.<br>Сохраните поиск — уведомим, когда появится 📭</p>';
+ return list.map(t=>{
+  const total=t.rate*km(t.from,t.to),fav=(favset||[]).includes(t.id);
+  return `<div class="card glass" onclick="openTruck(${t.id})">
+  <button class="fav" onclick="event.stopPropagation();toggleFav(${t.id})">${fav?"⭐":"☆"}</button>
+  <div class="cardrow"><div>${truckSVG(t.photo)}</div><div style="flex:1">
+   <div class="route">${esc(t.from)} <span class="dotline"></span> ${esc(t.to)}</div>
+   <div class="mut">${km(t.from,t.to)} км · ставка <b class="price">${t.rate} ₽/км</b> · итого ≈ ${total.toLocaleString("ru")} ₽</div>
+   <div style="margin-top:6px"><span class="pill">📅 Погрузка: ${t.date}</span><span class="pill gold">${t.pay}</span>${t.tonnage?'<span class="pill">'+t.tonnage+" т · "+t.vol+" м³</span>":""}${t.temp!="без режима"?'<span class="pill">❄ '+t.temp+"</span>":""}${t.spec?'<span class="pill">🔧 '+t.spec+"</span>":""}</div>
+   <div class="mut" style="margin-top:8px">${esc(t.name)} ${t.verified?'<span class="check">✓</span>':""}</div>
+  </div></div>
+  <div class="acts"><button class="btn small ok" onclick="event.stopPropagation();location='tel:+7900000000'">📞 Позвонить</button><button class="btn small ghost" onclick="event.stopPropagation();location='https://wa.me/79000000000'">💬 WhatsApp</button>${t.onRoad?'<span class="badge b-ok" style="align-self:center">● В пути</span>':""}</div></div>`}).join("");
+}
+let FEED={q:"",city:""};
+function matchFeed(t){
+ if(!FEED.city)return true;const c=FEED.city;
+ return t.from==c||t.to==c||t.from.includes(c)||t.to.includes(c)}
+function scrFeed(){
+ const reg=S.ads.length?S.ads[S.ads.length-1]:null;
+ return `<div class="top">${logoHTML()}<div style="flex:1"><h1 style="font-size:22px">Лента грузов</h1><div class="mut">${me()?esc(me().name)+", привет 👋":"Пробный режим"}</div></div><button class="iconbtn" onclick="toggleTheme()">🌓</button>${me()?"":'<button class="btn small" onclick="go(\'reg\')">Войти</button>'}</div>
+ <div class="search"><input list="ct" placeholder="🔎 Город отправки или назначения" value="${esc(FEED.city)}" oninput="FEED.city=this.value" style="margin:0"><button class="iconbtn" onclick="render()">🔍</button><datalist id="ct">${CITIES.map(c=>'<option value="'+c+'">').join("")}</datalist><button class="iconbtn" onclick="saveSearch()">🔔</button></div>
+ ${bannerHTML()}
+ ${S.news.length?'<div class="news glass" style="margin:12px 0">'+'+(S.news[S.news.length-1].cover?'<img src="'+S.news[S.news.length-1].cover+'">':'<div style="height:150px;background:linear-gradient(135deg,#2a3555,#141b2e)"></div>')+'<div class="nb"><span class="badge b-warn">НОВОСТЬ</span> <b>'+esc(S.news[S.news.length-1].title)+'</b><p class="mut" style="margin-top:4px">'+esc(S.news[S.news.length-1].text)+'</p></div></div>':""}
+ ${listingsHTML(S.listings.filter(matchFeed),me()?me().favs:[])}
+ <div class="glass" style="padding:16px;margin:14px 0"><b>💚 Благотворительность</b><p class="mut" style="margin-top:6px">С каждого оплаченного рейса 1 ₽ идёт на поддержку детских домов Татарстана.</p></div>
+ <div class="glass" style="padding:16px;margin:14px 0;text-align:center"><b>Подписывайся на наш канал 📢</b><p class="mut" style="margin:6px 0">Новости, советы перевозчикам и новые грузы</p><a href="https://t.me/proverennyi_gruz" target="_blank"><button class="btn ghost">Telegram-канал</button></a><p class="mut" style="margin:10px 0 0">Поддержка: <a href="https://t.me/proverennyi_support" target="_blank">@proverennyi_support</a></p></div>`}
+function toggleFav(id){const u=me();if(!u){toast("Зарегистрируйтесь");go("reg");return}u.favs=u.favs||[];const i=u.favs.indexOf(id);i>=0?u.favs.splice(i,1):u.favs.push(id);save();render()}
+function openTruck(id){const t=S.listings.find(x=>x.id==id);if(!t)return;
+ modal(`<h3>${esc(t.from)} → ${esc(t.to)}</h3>
+ <div class="cardrow" style="margin:10px 0">${truckSVG(t.photo)}<div><div class="price">${t.rate} ₽/км</div><div class="mut">${km(t.from,t.to)} км · итого ≈ ${(t.rate*km(t.from,t.to)).toLocaleString("ru")} ₽</div><div class="mut">Погрузка: ${t.date} · ${t.pay}</div></div></div>
+ <div><span class="pill">Тоннаж: ${t.tonnage} т</span><span class="pill">Объём: ${t.vol} м³</span><span class="pill">Кузов: ${t.body}</span>${t.temp!="без режимной"?'<span class="pill">Температура: '+t.temp+"</span>":""}${t.spec?'<span class="pill">Спецтехника: '+t.spec+"</span>":""}</div>
+ <hr><p class="mut">Перевозчик: ${esc(t.name)} ${t.verified?'<span class="check">✓ проверен</span>':""}</p>
+ <div class="acts"><a style="flex:1" href="tel:${t.phone}"><button class="btn ok">📞 Позвонить</button></a><a style="flex:1" href="https://wa.me/${t.phone.replace(/\D/g,"")}"><button class="btn ghost">💬 WhatsApp</button></a></div>
+ <button class="btn ghost" style="margin-top:8px" onclick="claimTo('${esc(t.name)}')">Оставить претензию</button>`)}
+function saveSearch(){const c=FEED.city;if(!c){toast("Введите город для поиска");return}if(S.saved.find(s=>s.city==c))return toast("Поиск уже сохранён");S.saved.push({city:c,ts:Date.now()});save();toast("🔔 Поиск «"+c+"» сохранён — уведомим о новых грузах")}
+function scrSaved(){return `<div class="top"><h2 style="margin:0">🔔 Сохранённые поиски</h2></div><div class="glass" style="padding:18px">
+ ${S.saved.length?S.saved.map((s,i)=>'<div class="item row"><div style="flex:1"><b>'+esc(s.city)+'</b><div class="mut">уведомления о новых грузах включены</div></div><button class="btn small bad" onclick="S.saved.splice('+i+',1);save();render()">✕</button></div>').join(""):'<p class="mut">Пока нет сохранённых поисков. Нажмите 🔔 в ленте рядом с поиском города.</p>'}
+ <hr><p class="mut">Уведомления приходят, когда в ленте появляется груз по вашему городу. Проверьте ленту — новые грузы подсвечиваются.</p></div>`}
+function scrFav(){const u=me();return `<div class="top"><h2 style="margin:0">⭐ Избранное</h2></div>${u?(u.favs||[]).length?listingsHTML(S.listings.filter(t=>u.favs.includes(t.id)),u.favs):'<div class="glass" style="padding:22px" class="cent"><p class="mut cent">Пока пусто. Нажмите ☆ на карточке груза — без ограничений по количеству.</p></div>':'<div class="glass" style="padding:22px"><p class="mut cent">Зарегистрируйтесь, чтобы добавлять в избранное.</p><button class="btn" style="margin-top:12px" onclick="go(\'reg\')">Регистрация</button></div>'}`}
+let CLAIM={};
+function scrClaims(){const u=me();
+ return `<div class="top"><h2 style="margin:0">📄 Претензии</h2></div><div class="glass" style="padding:18px">
+ ${!u?'<p class="mut">Войдите, чтобы создавать претензии.</p><button class="btn" style="margin-top:10px" onclick="go(\'reg\')">Регистрация</button>':`
+ <label>Кого касаемся</label><input id="cl_to" value="${esc(CLAIM.to||"")}" placeholder="Имя перевозчика или заказчика">
+ <label>Описание проблемы</label><textarea id="cl_txt" rows="4" placeholder="Опишите ситуацию: не вышел на связь, изменились условия, повреждение груза…"></textarea>
+ <label>Фотография (необязательно)</label><input type="file" accept="image/*" id="cl_img" onchange="CLAIM.img=event.target.files[0]">
+ <button class="btn" style="margin-top:12px" onclick="makeClaim()">Отправить претензию</button><hr>`}
+ ${(S.claims.filter(c=>!u||c.uid==u.id)).length?S.claims.filter(c=>!u||c.uid==u.id).map(c=>'<div class="item"><div class="row"><b style="flex:1">'+esc(c.to)+'</b><span class="badge '+(c.status=="Активная"?"b-warn":"b-ok")+'">'+c.status+'</span></div><p class="mut" style="margin:6px 0">'+esc(c.txt)+'</p>'+(c.img?'<img src="'+c.img+'" style="max-height:120px;border-radius:12px">':'')+'<div class="mut" style="margin-top:6px">'+new Date(c.t).toLocaleDateString("ru")+'</div></div>').join(""):(u?'<p class="mut">Претензий нет. Хорошая работа 👌</p>':"")}
+ </div>`}
+function makeClaim(){const txt=document.getElementById("cl_txt").value.trim(),to=document.getElementById("cl_to").value.trim();
+ if(!txt||!to){toast("Укажите получателя и текст");return}
+ if(censored(txt,me().id)){save();render();toast("⚠ Предупреждение за недопустимый текст! 3 предупреждения → Чёрный список");return}
+ const f=document.getElementById("cl_img").files[0];
+ const push=src=>{S.claims.unshift({uid:me().id,to,txt,img:src||"",status:"Активная",t:Date.now()});save();CLAIM={};render();toast("Претензия отправлена — решит администрация")};
+ if(f){const r=new FileReader();r.onload=e=>push(e.target.result);r.readAsDataURL(f)}else push()}
+function claimTo(name){CLAIM={to:name};modal(`<div id="mbody">${scrClaims().replace(/<div class="top">[\s\S]*?<\/h2>/,"")}</div>`)}
+function scrProfile(){const u=me();
+ if(!u)return `<div class="top"><h2 style="margin:0">👤 Профиль</h2></div><div class="glass" style="padding:22px;text-align:center"><div style="font-size:40px">👤</div><p class="mut" style="margin:8px 0">Вы в пробном режиме</p><button class="btn" onclick="go('reg')">Зарегистрироваться</button></div>`;
+ return `<div class="top">${logoHTML()}<div style="flex:1"><h2 style="margin:0">Профиль</h2></div><button class="iconbtn" onclick="toggleTheme()">🌓</button></div>
+ <div class="glass" style="padding:18px">${userCard(u)}
+ <hr><div class="grid2"><div><label>Оплата</label><div class="mut">наличные / НДС / без НДС</div></div><div><label>Телефон</label><div>${esc(u.tel)}</div></div></div>
+ ${u.role!="Грузовладелец"?'<div class="grid2"><div><label>Габариты</label><div class="mut">'+esc(u.dim||"—")+'</div></div><div><label>Тоннаж</label><div class="mut">'+esc(u.ton||"—")+" т</div></div></div><div class=\"mut\">Кузов: "+esc(u.body)+" · Температура: "+esc(u.temp)+" · Спецтехника: "+esc(u.spec||"нет")+"</div>":""}
+ <div style="margin-top:12px"><button class="btn small ${u.onRoad?"ok":""}" onclick="me().onRoad=!me().onRoad;save();render()">🚚 ${u.onRoad?"В пути (нажать, чтобы снять)":"Отметиться «В пути»"}</button></div></div>
+ <div class="glass" style="padding:18px;margin:12px 0"><h3>📞 Дополнительные номера (${(u.extra||[]).length}/5)</h3>
+ ${(u.extra||[]).map((e,i)=>'<div class="item row"><div style="flex:1">'+esc(e)+'</div><button class="btn small bad" onclick="me().extra.splice('+i+',1);save();render()">✕</button></div>').join("")}
+ ${(u.extra||[]).length<5?'<div class="row"><input id="ex_ph" placeholder="+7 900 000-00-00" style="margin:0"><button class="btn small" onclick="addExtra()">+</button></div>':'<p class="mut">Лимит 5 номеров достигнут</p>'}</div>
+ <div class="glass" style="padding:18px;margin:12px 0"><h3>⭐ Отзывы обо мне</h3>
+ ${(S.reviews.filter(r=>r.to==u.tel)).length?S.reviews.filter(r=>r.to==u.tel).map(r=>'<div class="item"><b>'+esc(r.from)+'</b> <span class="mut">· '+new Date(r.t).toLocaleDateString("ru")+'</span><div class="mut" style="margin-top:4px">'+"⭐".repeat(r.stars)+" "+esc(r.txt)+"</div></div>").join(""):'<p class="mut">Отзывов пока нет</p>'}</div>
+ <div class="glass" style="padding:18px;margin:12px 0"><h3>💬 Отзывы о приложении</h3>
+ ${(S.appReviews).length?S.appReviews.map(r=>'<div class="item"><b>'+esc(r.from)+'</b><div class="mut" style="margin-top:4px">'+"⭐".repeat(r.stars)+" "+esc(r.txt)+"</div></div>").join(""):'<p class="mut">Станьте первым автором отзыва</p>'}
+ <div class="row" style="margin-top:10px"><select id="ap_st" style="margin:0;width:120px"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select><input id="ap_txt" placeholder="Ваш отзыв" style="margin:0"><button class="btn small" onclick="appReview()">✓</button></div><p class="mut" style="margin-top:6px">Отзывы не удаляются пользователями — только администрацией.</p></div>
+ <div class="glass" style="padding:18px;margin:12px 0"><h3>💚 Благотворительность</h3><p class="mut" style="margin-top:6px">Спасибо, что с нами: вы помогаете детям Татарстана.</p></div>
+ <div class="glass" style="padding:18px;margin:12px 0;text-align:center"><b>Подписывайся на наш канал 📢</b><a href="https://t.me/proverennyi_gruz" target="_blank"><button class="btn ghost" style="margin-top:10px">Telegram-канал</button></a><p class="mut" style="margin-top:8px">Поддержка и реклама: <a href="https://t.me/proverennyi_support" target="_blank">Telegram</a></p></div>
+ <button class="btn ghost bad" style="margin:12px 0;border-color:rgba(255,92,108,.4)" onclick="delProfile()">🗑 Удалить профиль</button>`}
+function addExtra(){const p=phone(document.getElementById("ex_ph").value);if(p.length<12)return toast("Некорректный номер");me().extra=me().extra||[];me().extra.push(p);save();render()}
+function appReview(){const txt=document.getElementById("ap_txt").value.trim();if(!txt)return;censored(txt,me().id);S.appReviews.unshift({from:me().name,stars:+document.getElementById("ap_st").value,txt,t:Date.now()});save();render();toast("Спасибо за отзыв!")}
+function delProfile(){modal(`<h3>Удалить профиль?</h3><p class="mut" style="margin:10px 0">Аккаунт будет скрыт. Восстановление возможно в течение 7 дней — потом данные удалятся.</p><button class="btn bad" onclick="confirmDel()">Удалить</button><button class="btn ghost" style="margin-top:8px" onclick="closeModal()">Отмена</button>`)}
+function confirmDel(){const u=me();u.delAt=Date.now();S.session=null;save();closeModal();go("rules");toast("Профиль скрыт. Восстановление: войдите по тому же телефону в течение 7 дней")}
+function restoreCheck(){const u=S.users.find(x=>x.delAt&&Date.now()-x.delAt<7*86400000);if(u&&S.session==u.id)delete u.delAt}
+function toggleTheme(){S.theme=S.theme=="dark"?"light":"dark";save();render()}
+let ADM={authed:false,tab:"users"};
+function scrAdmin(){
+ if(!ADM.authed)return `<div style="height:18vh"></div><div class="glass" style="padding:24px;text-align:center"><div style="font-size:44px">🛡</div><h2 style="margin:10px 0 4px">Админ-панель</h2><p class="mut">Введите код доступа</p><input id="adm_code" type="password" placeholder="••••••••" style="margin-top:12px;text-align:center;letter-spacing:4px"><button class="btn" style="margin-top:14px" onclick="admLogin()">Войти</button><button class="btn ghost" style="margin-top:10px" onclick="go('feed')">Назад</button></div>`;
+ const tabs=[["users","Пользователи"],["claims","Претензии"],["news","Новости"],["ads","Реклама"],["files","Логотип и баннеры"],["log","Журнал нарушений"]];
+ let h=`<div class="top"><div style="flex:1"><h2 style="margin:0">🛡 Админ-панель</h2></div><button class="iconbtn" onclick="toggleTheme()">🌓</button></div><div class="search" style="flex-wrap:wrap">${tabs.map(t=>'<button class="btn small '+(ADM.tab==t[0]?"":"ghost")+'" onclick="ADM.tab=\''+t[0]+'\';render()">'+t[1]+"</button>").join("")}</div><div class="glass" style="padding:18px">`;
+ if(ADM.tab=="users"){h+="<h3>Пользователи</h3>"+S.users.map(u=>'<div class="item"><div class="row"><div style="flex:1">'+userCard(u)+'<div class="mut">Телефон: '+esc(u.tel)+' · Предупреждений: '+(u.warn||0)+'/3 '+(S.blacklist.includes(u.phone)?'<span class="badge b-bad">Ч/С</span>':'<span class="badge b-ok">Активен</span>')+'</div></div></div><div class="acts"><button class="btn small '+(u.verified?"ghost":"ok")+'" onclick="admVerify('+u.id+')">'+(u.verified?"Снять галочку":"✓ Выдать галочку")+'</button><button class="btn small ghost" onclick="admWarn('+u.id+')">⚠ Предупреждение</button><button class="btn small '+(S.blacklist.includes(u.phone)?"ok":"bad")+'" onclick="admBlack('+u.id+')">'+(S.blacklist.includes(u.phone)?"Убрать из Ч/С":"В Ч/С")+'</button></div></div>').join("")||'<p class="mut">Пользователей пока нет</p>'}
+ if(ADM.tab=="claims"){h+="<h3>Претензии</h3>"+S.claims.map((c,i)=>'<div class="item"><div class="row"><b style="flex:1">'+esc(c.to)+'</b><span class="badge '+(c.status=="Активная"?"b-warn":"b-ok")+'">'+c.status+'</span></div><p class="mut">'+esc(c.txt)+'</p>'+(c.status=="Активная"?'<button class="btn small ok" style="margin-top:8px" onclick="admClose('+i+')">✓ Решено</button>':'<p class="mut" style="margin-top:6px">Решено — кружки доверия возвращены</p>')+"</div>").join("")||'<p class="mut">Претензий нет</p>'}
+ if(ADM.tab=="news"){h+='<h3>Новость</h3><input id="n_t" placeholder="Заголовок"><label>Обложка</label><input type="file" accept="image/*" id="n_c" onchange="NEWS.img=event.target.files[0]"><textarea id="n_x" rows="3" placeholder="Текст новости"></textarea><button class="btn" style="margin-top:12px" onclick="admNews()">Опубликовать</button>'+(S.news.length?'<hr>'+S.news.map((n,i)=>'<div class="item"><b>'+esc(n.title)+'</b><p class="mut">'+esc(n.text)+'</p><button class="btn small bad" onclick="S.news.splice('+i+',1);save();render()">Удалить</button></div>').join(""):"")}
+ if(ADM.tab=="ads"){h+='<h3>Рекламная интеграция</h3><input id="a_t" placeholder="Название интеграции"><textarea id="a_x" rows="2" placeholder="Краткое описание"></textarea><button class="btn" style="margin-top:12px" onclick="admAd()">Добавить</button>'+(S.ads.length?'<hr>'+S.ads.map((a,i)=>'<div class="item"><span class="badge b-warn">РЕКЛАМНАЯ ИНТЕГРАЦИЯ</span> <b>'+esc(a.title)+'</b><p class="mut">'+esc(a.txt)+'</p><button class="btn small bad" onclick="S.ads.splice('+i+',1);save();render()">Удалить</button></div>').join(""):"")}
+ if(ADM.tab=="files"){h+='<h3>Логотип и баннеры</h3><p class="mut">Загрузите реальные фото — они появятся в шапке и в ленте.</p><label>Логотип</label><input type="file" accept="image/*" id="up_logo" onchange="upl(this,\'logo\')"><label>Баннер ленты</label><input type="file" accept="image/*" id="up_ban" onchange="upl(this,\'banner\')">'+(S.uploads.logo||S.uploads.banner?'<hr><div class="row"><div>'+(S.uploads.logo?'<img src="'+S.uploads.logo+'" style="width:56px;height:56px;border-radius:14px;object-fit:cover">':'')+'</div>'+(S.uploads.banner?'<img src="'+S.uploads.banner+'" style="height:70px;border-radius:14px;object-fit:cover;flex:1">':'')+'<button class="btn small bad" onclick="S.uploads={logo:\'\',banner:\'\'};save();render()">Сбросить</button></div>':'')}
+ if(ADM.tab=="log"){h+='<h3>Журнал нарушений</h3>'+(S.logs.length?S.logs.map(l=>'<div class="item mut">'+new Date(l.t).toLocaleString("ru")+' — '+esc(l.txt)+"</div>").join(""):'<p class="mut">Нарушений нет</p>')}
+ return h+"</div><button class='btn ghost' style='margin:14px 0' onclick=\"go('feed')\">← В приложение</button>"}
+function admLogin(){const c=document.getElementById("adm_code").value.trim();if(jh(c)==A_HASH){ADM.authed=true;render()}else toast("Неверный код")}
+function jh(s){let x=5381;for(let i=0;i<s.length;i++){x=((x*33)+s.charCodeAt(i))>>>0}return x.toString(16)}
+function admVerify(id){const u=S.users.find(x=>x.id==id);u.verified=!u.verified;save();render()}
+function admWarn(id){const u=S.users.find(x=>x.id==id);u.warn=(u.warn||0)+1;S.logs.unshift({t:Date.now(),txt:"Админ выдал предупреждение → "+u.name+(u.warn>=3?" → Ч/С":"")});if(u.warn>=3&&!S.blacklist.includes(u.phone))S.blacklist.push(u.phone);save();render()}
+function admBlack(id){const u=S.users.find(x=>x.id==id);const i=S.blacklist.indexOf(u.phone);i>=0?S.blacklist.splice(i,1):S.blacklist.push(u.phone);S.logs.unshift({t:Date.now(),txt:"Админ изменил Ч/С → "+u.name});save();render()}
+function admClose(i){S.claims[i].status="Решено";const u=S.users.find(x=>x.id==S.claims[i].uid);if(u){u.trust=Math.min(15,(u.trust||0)+1)}S.logs.unshift({t:Date.now(),txt:"Претензия закрыта: "+S.claims[i].to});save();render()}
+var NEWS={};function admNews(){const t=document.getElementById("n_t").value.trim(),x=document.getElementById("n_x").value.trim();if(!t)return;const f=document.getElementById("n_c").files[0];const push=src=>{S.news.unshift({title:t,text:x,cover:src||""});save();NEWS={};render();toast("Новость опубликована")};if(f){const r=new FileReader();r.onload=e=>push(e.target.result);r.readAsDataURL(f)}else push()}
+function admAd(){const t=document.getElementById("a_t").value.trim();if(!t)return;censored(document.getElementById("a_x").value);S.ads.push({title:t,txt:document.getElementById("a_x").value||""});save();render();toast("Реклама добавлена")}
+function upl(inp,key){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{S.uploads[key]=e.target.result;save();render();toast("Загружено ✓")};r.readAsDataURL(f)}
+
+function notifySaved(){
+ const fresh=S.listings.filter(t=>t.id>S.notifSeen);
+ const hit=S.saved.filter(s=>fresh.some(t=>t.from==s.city||t.to==s.city));
+ if(hit.length)setTimeout(()=>toast("🔔 Новые грузы: "+hit.map(h=>h.city).join(", ")),1200);
+ S.notifSeen=Math.max.apply(null,S.listings.map(t=>t.id));save()}
+function modal(h){const d=document.createElement("div");d.className="modal";d.id="md";d.onclick=e=>{if(e.target.id=="md")closeModal()};d.innerHTML='<div class="sheet glass">'+h+"</div>";document.body.appendChild(d)}
+function closeModal(){document.getElementById("md")&&document.getElementById("md").remove()}
+window.go=go;window.toggleFav=toggleFav;window.openTruck=openTruck;window.saveSearch=saveSearch;window.toggleTheme=toggleTheme;window.startTrial=startTrial;window.doReg=doReg;window.makeClaim=makeClaim;window.claimTo=claimTo;window.addExtra=addExtra;window.appReview=appReview;window.delProfile=delProfile;window.confirmDel=confirmDel;window.admLogin=admLogin;window.admVerify=admVerify;window.admWarn=admWarn;window.admBlack=admBlack;window.admClose=admClose;window.admNews=admNews;window.admAd=admAd;window.upl=upl;window.REG=REG;window.FEED=FEED;window.CLAIM=CLAIM;window.ADM=ADM;window.me=me;window.closeModal=closeModal;window.NEWS=NEWS;window.truckSVG=truckSVG;window.userCard=userCard;
+function boot(){
+ if(S.session){const u=S.users.find(x=>x.id==S.session);if(!u){S.session=null;save()}}
+ if(S.session)S.screen="feed";
+ restoreCheck();render();notifySaved()}
+boot();
 </script>
-</body></html>
+</body>
+</html>

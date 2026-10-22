@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Грузовоз — грузоперевозки по России</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f2f4f7; color: #1c1c1e; padding-bottom: 70px; }
+  header { background: #1a56db; color: #fff; padding: 14px 16px; position: sticky; top: 0; z-index: 10; }
+  header h1 { font-size: 20px; }
+  .tabs { display: flex; background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 52px; z-index: 9; }
+  .tab { flex: 1; text-align: center; padding: 12px 0; font-weight: 600; color: #6b7280; cursor: pointer; border-bottom: 2px solid transparent; }
+  .tab.active { color: #1a56db; border-bottom-color: #1a56db; }
+  .page { display: none; padding: 12px; }
+  .page.active { display: block; }
+  .card { background: #fff; border-radius: 14px; padding: 14px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.07); }
+  .card h3 { font-size: 16px; margin-bottom: 6px; }
+  .route { font-weight: 700; color: #1a56db; font-size: 15px; margin-bottom: 4px; }
+  .meta { font-size: 13px; color: #6b7280; margin-bottom: 8px; }
+  .price { font-size: 17px; font-weight: 800; color: #059669; }
+  .btn { display: block; width: 100%; padding: 14px; border: none; border-radius: 12px; background: #1a56db; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; }
+  .btn.secondary { background: #eef2ff; color: #1a56db; }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 4px; }
+  input, textarea, select { width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 15px; background: #fff; }
+  textarea { resize: vertical; min-height: 60px; }
+  .fab { position: fixed; bottom: 20px; right: 16px; width: 56px; height: 56px; border-radius: 50%; background: #1a56db; color: #fff; font-size: 28px; border: none; box-shadow: 0 4px 12px rgba(26,86,219,.4); z-index: 20; }
+  .empty { text-align: center; color: #9ca3af; padding: 40px 0; }
+  .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 8px; background: #fef3c7; color: #92400e; margin-left: 6px; }
+</style>
+</head>
+<body>
+<header><h1>🚚 Грузовоз</h1></header>
+<div class="tabs">
+  <div class="tab active" onclick="showPage('orders')">Заказы</div>
+  <div class="tab" onclick="showPage('create')">Разместить груз</div>
+  <div class="tab" onclick="showPage('me')">Мои заявки</div>
+</div>
+
+<div id="orders" class="page active"></div>
+
+<div id="create" class="page">
+  <div class="card">
+    <h3>Новая заявка на перевозку</h3>
+    <label>Откуда (город, адрес)</label><input id="f_from" placeholder="Казань, ул. Баумана 1">
+    <label>Куда (город, адрес)</label><input id="f_to" placeholder="Москва, ул. Ленина 5">
+    <label>Дата погрузки</label><input id="f_date" type="date">
+    <label>Что везём</label><input id="f_cargo" placeholder="Мебель, коробки...">
+    <label>Вес, кг</label><input id="f_weight" type="number" placeholder="500">
+    <label>Объём, м³</label><input id="f_volume" type="number" placeholder="10">
+    <label>Тип кузова</label>
+    <select id="f_body">
+      <option>Любой</option><option>Тент</option><option>Фургон</option>
+      <option>Рефрижератор</option><option>Борт</option><option>Зип</option>
+    </select>
+    <label>Ваше имя</label><input id="f_name" placeholder="Иван">
+    <label>Телефон для связи</label><input id="f_phone" placeholder="+7...">
+    <label>Цена, ₽ (фиксированная)</label><input id="f_price" type="number" placeholder="15000">
+    <label>Комментарий</label><textarea id="f_comment" placeholder="Оплата при личной сделке. Погрузка с 9:00"></textarea>
+    <br><br>
+    <button class="btn" onclick="createOrder()">Разместить заявку</button>
+  </div>
+</div>
+
+<div id="me" class="page"></div>
+
+<button class="fab" onclick="showPage('create')">+</button>
+
+<script>
+const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+if (tg) { tg.expand(); tg.setHeaderColor('#1a56db'); }
+
+const DEMO = [
+ {id:1, from:'Казань, ул. Баумана 1', to:'Москва, ул. Ленина 5', date:'2026-10-25', cargo:'Мебель, 20 коробок', weight:500, volume:10, body:'Тент', name:'Иван', price:15000, comment:'Погрузка с 9:00'},
+ {id:2, from:'Самара, Заречная 12', to:'Уфа, Ленина 40', date:'2026-10-24', cargo:'Стройматериалы', weight:3000, volume:20, body:'Борт', name:'Алексей', price:22000, comment:''}
+];
+let orders = JSON.parse(localStorage.getItem('gv_orders')||'null') || DEMO;
+let mine = JSON.parse(localStorage.getItem('gv_mine')||'[]');
+
+function save(){ localStorage.setItem('gv_orders', JSON.stringify(orders)); localStorage.setItem('gv_mine', JSON.stringify(mine)); }
+
+function fmtDate(d){ try { return new Date(d).toLocaleDateString('ru-RU',{day:'numeric',month:'long'}); } catch(e){ return d; } }
+
+function card(o, isMine){
+  return `<div class="card">
+    <div class="route">${o.from} → ${o.to}</div>
+    <div class="meta">${fmtDate(o.date)} · ${o.cargo} · ${o.weight} кг · ${o.volume} м³ · ${o.body}${isMine?'<span class="badge">ваша заявка</span>':''}</div>
+    <div class="meta">Грузоотправитель: ${o.name}</div>
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span class="price">${Number(o.price).toLocaleString('ru-RU')} ₽</span>
+      ${isMine ? `<button class="btn secondary" style="width:auto;padding:8px 14px" onclick="alert('Заявку можно снять позже')">Снять</button>`
+      : `<button class="btn" style="width:auto;padding:10px 18px" onclick="respond(${o.id})">Откликнуться</button>`}
+    </div>
+    ${o.comment?`<div class="meta" style="margin-top:6px">💬 ${o.comment}</div>`:''}
+  </div>`;
+}
+
+function render(){
+  document.getElementById('orders').innerHTML = orders.length ? orders.map(o=>card(o,false)).join('') : '<div class="empty">Пока нет заказов. Разместите первый!</div>';
+  const my = orders.filter(o=>mine.includes(o.id));
+  document.getElementById('me').innerHTML = my.length ? my.map(o=>card(o,true)).join('') : '<div class="empty">Вы ещё не размещали заявок</div>';
+}
+
+function showPage(p){
+  document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
+  document.getElementById(p).classList.add('active');
+  const idx = {orders:0, create:1, me:2}[p];
+  document.querySelectorAll('.tab')[idx].classList.add('active');
+  if (p==='orders'||p==='me') render();
+}
+
+function createOrder(){
+  const o = {
+    id: Date.now(),
+    from: document.getElementById('f_from').value.trim(),
+    to: document.getElementById('f_to').value.trim(),
+    date: document.getElementById('f_date').value,
+    cargo: document.getElementById('f_cargo').value.trim() || 'Груз',
+    weight: document.getElementById('f_weight').value || 0,
+    volume: document.getElementById('f_volume').value || 0,
+    body: document.getElementById('f_body').value,
+    name: document.getElementById('f_name').value.trim() || 'Грузоотправитель',
+    phone: document.getElementById('f_phone').value.trim(),
+    price: document.getElementById('f_price').value || 0,
+    comment: document.getElementById('f_comment').value.trim()
+  };
+  if (!o.from || !o.to || !o.date) { alert('Заполните адреса и дату погрузки'); return; }
+  orders.unshift(o); mine.push(o.id); save();
+  ['f_from','f_to','f_cargo','f_weight','f_volume','f_comment'].forEach(id=>document.getElementById(id).value='');
+  showPage('me');
+  if (tg && tg.showAlert) tg.showAlert('Заявка размещена!'); else alert('Заявка размещена!');
+}
+
+function respond(id){
+  const o = orders.find(x=>x.id===id);
+  const msg = `Здравствуйте! Хочу взять заказ: ${o.from} → ${o.to}, ${fmtDate(o.date)}`;
+  const phone = o.phone ? `Тел: ${o.phone}` : '';
+  if (tg && tg.openTelegramLink) {
+    tg.openTelegramLink('https://t.me/share/url?url=&text=' + encodeURIComponent('Заявка №'+o.id+': '+msg));
+  } else {
+    alert('Отклик: ' + msg + ' ' + phone);
+  }
+}
+
+render();
+</script>
+</body>
+</html>

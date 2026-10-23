@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проверенный груз РТ — биржа грузоперевозок Татарстана</title>
+<meta name="description" content="Биржа грузов и транспорта Республики Татарстан: проверенные перевозчики, тендеры, расчёт расстояний и ставок.">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap header-inner">
+    <a class="brand" data-page="home">
+      <img src="assets/logo.jpg" alt="Проверенный груз РТ" class="brand-logo">
+      <div class="brand-text"><b>Проверенный груз</b><span>РТ · Биржа перевозок</span></div>
+    </a>
+    <nav class="nav" id="nav">
+      <button class="nav-link active" data-page="home">Главная</button>
+      <button class="nav-link" data-page="cargo">Грузы</button>
+      <button class="nav-link" data-page="transport">Транспорт</button>
+      <button class="nav-link" data-page="carriers">Перевозчики</button>
+      <button class="nav-link" data-page="tenders">Тендеры</button>
+      <button class="nav-link" data-page="calc">Калькулятор</button>
+      <button class="nav-link" data-page="reviews">Отзывы</button>
+    </nav>
+    <div class="header-actions">
+      <button class="btn btn-ghost" data-page="favorites" id="fav-counter">★ Избранное</button>
+      <button class="btn btn-gold" data-open="cargo-modal">+ Добавить груз</button>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ГЛАВНАЯ -->
+<section class="page active" id="page-home">
+  <div class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge"><img src="assets/logo.jpg" alt="">Проверенный груз РТ</div>
+        <h1>Биржа грузов и транспорта <em>Республики Татарстан</em></h1>
+        <p>Размещайте грузы, находите проверенных перевозчиков с рейтингом надёжности, рассчитывайте расстояния и ставки — всё в одном месте.</p>
+        <div class="hero-actions">
+          <button class="btn btn-gold btn-lg" data-page="cargo">Найти груз</button>
+          <button class="btn btn-outline btn-lg" data-page="transport">Найти транспорт</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b data-count="12480">0</b><span>грузов на бирже</span></div>
+          <div class="stat"><b data-count="4260">0</b><span>свободных машин</span></div>
+          <div class="stat"><b data-count="1890">0</b><span>перевозчиков в РТ</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="assets/truck-1.jpg" alt="Грузовик" class="hero-truck">
+        <div class="hero-card">
+          <div class="hero-card-line"><b>Казань → Москва</b><span>Тент · 12 т · 86 м³</span></div>
+          <div class="hero-card-line gold"><b>85 000 ₽</b><span>ставка подтверждена</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h2 class="section-title">Сервисы платформы</h2>
+    <div class="features">
+      <div class="feature"><div class="feature-ico gold">✓</div><h3>Проверенный груз РТ</h3><p>Значок верификации для грузов и перевозчиков с подтверждёнными документами и опытом рейсов по РТ.</p></div>
+      <div class="feature"><div class="feature-ico">₽</div><h3>Гарантия оплаты</h3><p>Безопасная сделка: оплата перевозки резервируется и выплачивается перевозчику после подписания документов.</p></div>
+      <div class="feature"><div class="feature-ico">⌗</div><h3>Электронный документооборот</h3><p>Транспортная накладная и заявка в электронном виде с юридически значимой подписью.</p></div>
+      <div class="feature"><div class="feature-ico">◈</div><h3>Страхование грузов</h3><p>Полис на перевозку можно оформить прямо из карточки груза — за пару минут.</p></div>
+      <div class="feature"><div class="feature-ico">≣</div><h3>Средние ставки</h3><p>Актуальные ставки по направлениям: видно, сколько платят за рейс в реальном времени.</p></div>
+      <div class="feature"><div class="feature-ico">◎</div><h3>Карта грузов</h3><p>Визуализация грузопотока по регионам РТ и России для планирования своих рейсов.</p></div>
+    </div>
+
+    <div class="section-head">
+      <h2 class="section-title">Последние грузы на бирже</h2>
+      <button class="btn btn-ghost" data-page="cargo">Все грузы →</button>
+    </div>
+    <div class="cards" id="home-cargo-list"></div>
+
+    <h2 class="section-title">Выгодные направления</h2>
+    <div class="directions" id="directions"></div>
+  </div>
+</section>
+
+<!-- ГРУЗЫ -->
+<section class="page" id="page-cargo">
+  <div class="wrap">
+    <div class="section-head">
+      <div><h2 class="section-title">Доска грузов</h2><p class="sub">Размещено грузов: <span id="cargo-count">0</span> · обновление в реальном времени</p></div>
+      <button class="btn btn-gold" data-open="cargo-modal">+ Добавить груз</button>
+    </div>
+    <div class="filters">
+      <input type="text" id="cf-from" placeholder="Пункт загрузки">
+      <input type="text" id="cf-to" placeholder="Пункт разгрузки">
+      <select id="cf-body"><option value="">Любой кузов</option></select>
+      <input type="number" id="cf-wmin" placeholder="Вес от, т" min="0">
+      <input type="number" id="cf-wmax" placeholder="Вес до, т" min="0">
+      <label class="chk"><input type="checkbox" id="cf-rate"> Только со ставкой</label>
+      <label class="chk"><input type="checkbox" id="cf-verified"> Только проверенные</label>
+      <button class="btn btn-ghost" id="cf-reset">Сбросить</button>
+    </div>
+    <div class="cards" id="cargo-list"></div>
+  </div>
+</section>
+
+<!-- ТРАНСПОРТ -->
+<section class="page" id="page-transport">
+  <div class="wrap">
+    <div class="section-head">
+      <div><h2 class="section-title">Доска транспорта</h2><p class="sub">Свободные машины: <span id="transport-count">0</span></p></div>
+      <button class="btn btn-gold" data-open="transport-modal">+ Добавить машину</button>
+    </div>
+    <div class="filters">
+      <input type="text" id="tf-from" placeholder="Пункт загрузки">
+      <input type="text" id="tf-to" placeholder="Пункт разгрузки">
+      <select id="tf-body"><option value="">Любой кузов</option></select>
+      <input type="number" id="tf-cap" placeholder="Тоннаж от, т" min="0">
+      <button class="btn btn-ghost" id="tf-reset">Сбросить</button>
+    </div>
+    <div class="cards" id="transport-list"></div>
+  </div>
+</section>
+
+<!-- ПЕРЕВОЗЧИКИ -->
+<section class="page" id="page-carriers">
+  <div class="wrap">
+    <h2 class="section-title">Рейтинг надёжности перевозчиков</h2>
+    <p class="sub">Проверяйте контрагента перед сделкой: балл надёжности, отзывы участников и значок «Проверенный груз РТ».</p>
+    <div class="filters">
+      <input type="text" id="rf-city" placeholder="Город">
+      <select id="rf-min"><option value="0">Балл: любой</option><option value="3">Балл: от 3</option><option value="4">Балл: от 4</option><option value="4.5">Балл: от 4.5</option></select>
+      <button class="btn btn-ghost" id="rf-reset">Сбросить</button>
+    </div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Компания</th><th>Город</th><th>Надёжность</th><th>Отзывы</th><th>ИНН</th><th></th></tr></thead>
+        <tbody id="carrier-list"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ТЕНДЕРЫ -->
+<section class="page" id="page-tenders">
+  <div class="wrap">
+    <h2 class="section-title">Тендеры на перевозку</h2>
+    <p class="sub">Грузоотправители отбирают перевозчиков на длительные маршруты. Подавайте заявку до дедлайна.</p>
+    <div class="cards" id="tender-list"></div>
+  </div>
+</section>
+
+<!-- КАЛЬКУЛЯТОР -->
+<section class="page" id="page-calc">
+  <div class="wrap">
+    <h2 class="section-title">Калькулятор рейса</h2>
+    <p class="sub">Расстояние, время в пути, расход топлива, «Платон» и ориентировочная стоимость перевозки.</p>
+    <div class="calc-grid">
+      <div class="card calc-form">
+        <label>Откуда</label>
+        <select id="calc-from"></select>
+        <label>Куда</label>
+        <select id="calc-to"></select>
+        <label>Вес груза, т</label>
+        <input type="number" id="calc-weight" value="20" min="1" max="40">
+        <label class="chk"><input type="checkbox" id="calc-platon" checked> Маршрут по дорогам, входящим в «Платон»</label>
+        <button class="btn btn-gold" id="calc-run">Рассчитать</button>
+      </div>
+      <div class="card calc-result" id="calc-result">
+        <p class="muted">Заполните маршрут и нажмите «Рассчитать».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ОТЗЫВЫ -->
+<section class="page" id="page-reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <div><h2 class="section-title">Отзывы участников</h2><p class="sub">Опыт работы с компаниями на бирже — это защищает всех участников сделки.</p></div>
+      <button class="btn btn-gold" data-open="review-modal">+ Оставить отзыв</button>
+    </div>
+    <div class="cards" id="review-list"></div>
+  </div>
+</section>
+
+<!-- ИЗБРАННОЕ -->
+<section class="page" id="page-favorites">
+  <div class="wrap">
+    <h2 class="section-title">Избранное</h2>
+    <p class="sub">Сохранённые грузы и машины. Данные хранятся локально в вашем браузере.</p>
+    <div class="cards" id="fav-list"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="brand"><img src="assets/logo.jpg" class="brand-logo" alt=""><div class="brand-text"><b>Проверенный груз</b><span>РТ · Биржа перевозок</span></div></div>
+      <p class="muted">Демонстрационная мини-платформа грузоперевозок Республики Татарстан.</p>
+    </div>
+    <div class="footer-col">
+      <b>Участникам</b>
+      <button class="link" data-page="cargo">Грузы</button>
+      <button class="link" data-page="transport">Транспорт</button>
+      <button class="link" data-page="carriers">Перевозчики</button>
+    </div>
+    <div class="footer-col">
+      <b>Сервисы</b>
+      <button class="link" data-page="calc">Расчёт рейса</button>
+      <button class="link" data-page="tenders">Тендеры</button>
+      <button class="link" data-page="reviews">Отзывы</button>
+    </div>
+  </div>
+  <div class="wrap muted small">© 2026 Проверенный груз РТ. Учебный демонстрационный проект.</div>
+</footer>
+
+<!-- МОДАЛКА: добавить груз -->
+<div class="modal" id="cargo-modal">
+  <div class="modal-card">
+    <div class="modal-head"><b>Добавить груз</b><button class="modal-close" data-close="cargo-modal">✕</button></div>
+    <div class="modal-body">
+      <label>Пункт загрузки *</label><input type="text" id="nc-from" placeholder="Например: Казань">
+      <label>Пункт разгрузки *</label><input type="text" id="nc-to" placeholder="Например: Москва">
+      <label>Наименование груза *</label><input type="text" id="nc-name" placeholder="Например: мебель">
+      <div class="row2">
+        <div><label>Вес, т *</label><input type="number" id="nc-weight" min="0" step="0.1"></div>
+        <div><label>Объём, м³</label><input type="number" id="nc-volume" min="0"></div>
+      </div>
+      <label>Тип кузова</label><select id="nc-body"></select>
+      <label>Дата погрузки</label><input type="date" id="nc-date">
+      <label>Ставка, ₽ (необязательно)</label><input type="number" id="nc-rate" min="0">
+      <label>Ваша компания</label><input type="text" id="nc-company" placeholder="Название фирмы">
+      <div class="chk-line"><label class="chk"><input type="checkbox" id="nc-verified" checked> Запросить значок «Проверенный груз РТ»</label></div>
+      <button class="btn btn-gold btn-lg" id="nc-submit">Разместить груз</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: добавить транспорт -->
+<div class="modal" id="transport-modal">
+  <div class="modal-card">
+    <div class="modal-head"><b>Добавить транспорт</b><button class="modal-close" data-close="transport-modal">✕</button></div>
+    <div class="modal-body">
+      <label>Марка и модель *</label><input type="text" id="nt-model" placeholder="Например: КАМАЗ 54901">
+      <label>Тип кузова *</label><select id="nt-body"></select>
+      <div class="row2">
+        <div><label>Грузоподъёмность, т *</label><input type="number" id="nt-cap" min="0" step="0.5"></div>
+        <div><label>Объём, м³</label><input type="number" id="nt-volume" min="0"></div>
+      </div>
+      <label>Свободен в направлении *</label>
+      <div class="row2">
+        <div><input type="text" id="nt-from" placeholder="Откуда"></div>
+        <div><input type="text" id="nt-to" placeholder="Куда"></div>
+      </div>
+      <label>Готов с даты</label><input type="date" id="nt-date">
+      <label>Ожидаемая ставка, ₽/км</label><input type="number" id="nt-rate" min="0">
+      <label>Компания</label><input type="text" id="nt-company" placeholder="Название фирмы">
+      <button class="btn btn-gold btn-lg" id="nt-submit">Разместить машину</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: отзыв -->
+<div class="modal" id="review-modal">
+  <div class="modal-card">
+    <div class="modal-head"><b>Оставить отзыв</b><button class="modal-close" data-close="review-modal">✕</button></div>
+    <div class="modal-body">
+      <label>О ком отзыв</label><select id="nr-company"></select>
+      <label>Оценка</label>
+      <div class="stars-input" id="nr-stars">
+        <span class="star" data-v="1">★</span><span class="star" data-v="2">★</span><span class="star" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span>
+      </div>
+      <label>Комментарий</label><textarea id="nr-text" rows="4" placeholder="Как прошла перевозка: сроки, коммуникация, документы"></textarea>
+      <button class="btn btn-gold btn-lg" id="nr-submit">Отправить отзыв</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="js/app.js"></script>
+</body>
+</html>
